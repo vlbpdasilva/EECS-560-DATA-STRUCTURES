@@ -11,8 +11,9 @@
 #include <fstream>
 #include <string>
 
+
 /*
-*	Helper method, prints menu. 
+	Helper method, prints menu. 
 */
 void print()
 {
@@ -25,11 +26,6 @@ void print()
 	std::cout << "Selection: ";
 }
 
-/*
- * Operates menu using print() method.
- * Inserts values from data.txt
- * Controls List and Node classes
- */
 int main()
 {  
 	int number;  // dummy variable for contents of data.txt
@@ -52,12 +48,10 @@ int main()
 	do
 	{
 		print();
-		std::cin >> selection;	// expects an int. 
+		std::cin >> selection;	
 			
-		switch(selection)
-                {
-                    case 1: // INSERT
-		
+		if(selection == 1)  // INSERT
+		{
 			std::cout << "Enter value to insert: ";
 			std::cin >> insertValue;
 			
@@ -65,23 +59,18 @@ int main()
 				std::cout << "Value already exists in the list. Try again." << std::endl;
 			else
 				myList->insert(insertValue);
-                        break;
-			
-                    case 2:  // PRINT
+		}	
+		else if(selection == 2)  // PRINT
 			myList -> print();
-                        break;
 			
-                    case 3:  // EXIT
+		else if(selection == 3)  // EXIT
 			std::cout<< "Program exit" << std::endl;
-                        break;
 		
-                    default: // USER ENTERED SOMETHING OTHER THAN 1, 2, OR 3
+		else  // USER ENTERED SOMETHING OTHER THAN 1, 2, OR 3
 			std::cout << "Invalid input, try again" << std::endl;
-                        break;
-                }       
 		
 	}
-	while(selection!=3);	// controls do-while loop, quits if selection = 3
+	while(selection!=3);	
 	
 	delete myList;
 	
