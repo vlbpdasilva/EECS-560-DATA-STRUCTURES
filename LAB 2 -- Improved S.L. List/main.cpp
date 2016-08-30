@@ -35,20 +35,24 @@ void print()
  */
 int main()
 {  
-	int number;  // dummy variable for contents of data.txt
-	int selection; // menu selection picked by user
+	int number;
+        int number2;     // dummy variables for contents of data.txt
+	int selection;   // menu selection picked by user
 	int insertValue; // value to be insert into list
 	int deleteValue; // value to be deleted from list
 	
 	List* myList = new List();
         List* myList2 = new List();
 
-	std::ifstream myFile;
-	
+	std::ifstream myFile;	
 	myFile.open("data.txt");
-	
-	while(myFile >> number)    // inserts contents of data.txt into list
+        while(myFile >> number)    // inserts contents of data.txt into list
             myList -> insert(number);
+        
+        std::ifstream myFile2;	
+	myFile2.open("data2.txt");
+	while(myFile2 >> number2)    // inserts contents of data2.txt into list2
+            myList2 -> insert(number2);
 	
 	do
 	{
@@ -79,15 +83,12 @@ int main()
                         myList->reverse();
                         break;
                     
-                    case 4:  // CONCATENATE, NOT FULLY IMPLEMENTED YET
-                        myFile.open("data2.txt");
-                        while(myFile >> number)
-                           myList2 -> insert(number);
-                        break;
-                        
+                    case 4:  
+                        myList->concatenate(myList2);
+                        break;                        
                         
                     case 5:  // PRINT
-			myList -> print();
+			myList-> print();
                         break;
 			
                     case 6:  // EXIT

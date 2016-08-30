@@ -63,8 +63,7 @@ void List::insert(int n)
 		m_front->setValue(n);
 		m_front -> setNext(nullptr);
 		m_back = m_front;
-		isEmpty = 0;
-	
+		isEmpty = 0;	
 	}
 	else
 	{
@@ -135,7 +134,6 @@ bool List::erase (int f)
     {
         delete m_front;
         m_front = temp->getNext();
-        return 1;
     }
     else if(!(search(f)->getNext())) // VALUE ON BACK OF LIST
     {
@@ -147,7 +145,6 @@ bool List::erase (int f)
                 delete m_back;
                 m_back = temp;
                 m_back->setNext(nullptr);
-                return 1;
             }
         }
     }
@@ -158,9 +155,14 @@ bool List::erase (int f)
         
         temp2 = (temp->getNext())->getNext();
         delete temp->getNext();
-        temp->setNext(temp2);    
-
-    }        
+        temp->setNext(temp2);  
+    }       
+    
+    if(search(f)) 
+        erase(f);
+    
+    std::cout<<"An occurrence of the number " << f << " was deleted from the main list." << std::endl;
+    return 1;
 }
 
 void List::reverse()
@@ -180,5 +182,30 @@ Node* List::reverseHelper(Node* pivot)
         m_back = pivot; 
     }
     return pivot;
+}
+
+void List::concatenate(List* l)       /// myList2 is being passed in
+{
+    concatenateHelper(l->m_front);  
+    std::cout << "List 2 sucessfully concatenated onto List 1." << std::endl;
+}
+
+Node* List::concatenateHelper(Node* n)
+{
+    if(!(n->getNext()))
+        m_back = n;
+    else
+    {
+        insertNode(n);
+        concatenateHelper(n->getNext());
+    }
+    return n;
+}
+
+void List::insertNode(Node* n)
+{
+    Node* temp = m_back;
+    m_back = n;
+    temp->setNext(n);
 }
 

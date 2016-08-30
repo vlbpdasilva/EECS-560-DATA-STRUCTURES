@@ -26,7 +26,10 @@ class List      // specific documentation for List class on List.cpp
 	void memdelete();
         Node* reverseHelper(Node* node);
         void reverse();
-	
+        void concatenate(List* l);
+        Node* concatenateHelper(Node* n);
+        void insertNode(Node* n);
+
 	private:
 	
 	Node* m_back;	
