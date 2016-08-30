@@ -1,9 +1,9 @@
 /**
 *	@file : main.cpp
 *	@author :  Victor Berger da Silva
-*	@date : Aug 26 2016
+*	@date : Aug 29 2016
 *	Purpose: main file, controls Node and List classes
-	Single Linked List --- EECS 560 -- prof. Kong/TA: Hajiarbabi
+	Single Linked List --- EECS 560 -- prof. Kong/TA: Hajiarbabi --- LAB 2
 */
 
 #include "List.h"
@@ -41,18 +41,15 @@ int main()
 	int deleteValue; // value to be deleted from list
 	
 	List* myList = new List();
+        List* myList2 = new List();
 
 	std::ifstream myFile;
 	
 	myFile.open("data.txt");
 	
 	while(myFile >> number)    // inserts contents of data.txt into list
-	{
-		myList -> insert(number);
-	}
+            myList -> insert(number);
 	
-	myFile.close();
-
 	do
 	{
 		print();
@@ -67,19 +64,28 @@ int main()
 			
 			if(myList-> search(insertValue))
 				std::cout << "Value already exists in the list. Try again." << std::endl;
-			else
-				myList->insert(insertValue);
+			else myList->insert(insertValue);
                         break;
                         
-                    case 2:
+                    case 2:  // ERASE
                         
                         std::cout << "Enter value to delete: ";
                         std::cin >> deleteValue;
                         myList->erase(deleteValue);
-                        
-                      //  myList->search(17);
                         break;
-			
+                        
+                    case 3:   // REVERSE
+                        
+                        myList->reverse();
+                        break;
+                    
+                    case 4:  // CONCATENATE, NOT FULLY IMPLEMENTED YET
+                        myFile.open("data2.txt");
+                        while(myFile >> number)
+                           myList2 -> insert(number);
+                        break;
+                        
+                        
                     case 5:  // PRINT
 			myList -> print();
                         break;
@@ -88,15 +94,17 @@ int main()
 			std::cout<< "Program exit" << std::endl;
                         break;
 		
-                    default: // USER ENTERED SOMETHING OTHER THAN 1, 2, OR 3
+                    default: // USER ENTERED SOMETHING ELSE
 			std::cout << "Invalid input, try again" << std::endl;
                         break;
                 }       
 		
 	}
-	while(selection!=6);	// controls do-while loop, quits if selection = 3
+	while(selection!=6);	// controls do-while loop, quits if selection = 6
 	
+        myFile.close();
 	delete myList;
+        delete myList2;
 	
 	return 0;  
   

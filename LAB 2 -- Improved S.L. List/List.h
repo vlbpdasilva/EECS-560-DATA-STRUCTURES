@@ -24,6 +24,8 @@ class List      // specific documentation for List class on List.cpp
 	Node* search(int f);
         bool erase(int f);
 	void memdelete();
+        Node* reverseHelper(Node* node);
+        void reverse();
 	
 	private:
 	

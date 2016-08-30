@@ -8,7 +8,6 @@
 
 #include "List.h"
 #include "Node.h"
-
 #include <iostream>
 
 /*
@@ -48,7 +47,6 @@ void List::memdelete()
 	}
 	
 	m_front = m_back = nullptr;
-
 }
 
 /*
@@ -58,8 +56,7 @@ void List::memdelete()
  * @RETURN: void
  */
 void List::insert(int n)
-{
-	
+{	
 	if(isEmpty)
 	{
 		m_front = new Node();
@@ -75,7 +72,6 @@ void List::insert(int n)
 		m_back = new Node();
 		temp->setNext(m_back);
 		m_back -> setValue(n);
-
 	}
 }
 
@@ -87,7 +83,6 @@ void List::insert(int n)
  */
 void List::print()
 {
-
 	Node* temp2 = m_front;
 
 	while(!(temp2->getNext()==nullptr))
@@ -126,7 +121,7 @@ Node* List::search(int f)
 /* Erases Node from list, takes node value argument (f)
  * Returns 1 if item is erased, 0 if item did not exist
  */
-bool List::erase (int f)            /// SEE NOTEBOOK. NEED CASES FOR FRONT, MIDDLE, BACK
+bool List::erase (int f)            
 {                                   /// TODO: CONTINUE CHECKING FOR DUPLICATES
     Node* temp = m_front;
     Node* temp2;
@@ -165,7 +160,25 @@ bool List::erase (int f)            /// SEE NOTEBOOK. NEED CASES FOR FRONT, MIDD
         delete temp->getNext();
         temp->setNext(temp2);    
 
+    }        
+}
+
+void List::reverse()
+{
+    reverseHelper(m_front);
+    m_back->setNext(nullptr);
+}
+
+Node* List::reverseHelper(Node* pivot)          
+{
+    if(pivot->getNext() == nullptr) /// end condition for recursion
+        m_front = pivot;
+    else
+    {
+        Node* temp = reverseHelper(pivot->getNext());
+        temp->setNext(pivot);
+        m_back = pivot; 
     }
-        
+    return pivot;
 }
 
