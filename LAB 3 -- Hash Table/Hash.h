@@ -14,12 +14,14 @@ class Hash
 
 {
 	public:
+	
 	Hash(int k);
 	void print();
 	void insert(int toInsert);
 	bool contains(int x);
 	bool isfull();
-	void hash(int x);
+	int hash(int x);
+	void remove(int a);
 
 
 	private:

@@ -29,6 +29,7 @@ int main()
 	int number;
 	int headOfInput;
 	int toInsert;
+	int toDelete;
 
 	ifstream myFile;	
 	myFile.open("data.txt");
@@ -51,6 +52,12 @@ int main()
 			cin >> toInsert;
 			myHash.insert(toInsert);
 			break;
+/* 			
+			case 2: // DELETE/REMOVE
+			cout << "Which number do you want to remove from the hash table?\nSelection: ";
+			cin >> toDelete;
+			myHash.remove(toDelete);
+			break; */
 			
 			case 3: // PRINT
 	    	myHash.print();
@@ -58,6 +65,13 @@ int main()
 
 			case 4: // EXIT
 			cout << "Program exit.\n";
+			break;
+			
+			case 5: 
+			cout << "CONTAINS: 5" << myHash.contains(5) << endl;
+			cout << "CONTAINS: 56" << myHash.contains(56) << endl;
+			cout << "CONTAINS: 10" << myHash.contains(10) << endl;
+			cout << "CONTAINS: 42" << myHash.contains(42) << endl;
 			break;
 			
 			default: // USER ENTERED INTEGER OTHER THAN 1, 2, 3, 4

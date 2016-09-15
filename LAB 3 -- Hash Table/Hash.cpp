@@ -35,41 +35,59 @@ bool Hash::isfull()
 void Hash::insert(int toInsert)
 {
 	if(isfull())
-	{
 		std::cout << "Table is already full, cannot insert element." << std::endl;
-		return;
-	}
 
 	else if(contains(toInsert))
-	{
 		std::cout << "Hash table already contains element " << toInsert << ". Cannot insert." <<std::endl;
-		return;
-	}
-		
-	hashres = toInsert % hashmod;
-
-	if(table[hashres] == -1)
-		table[hashres] = toInsert;
-
-	else 
+	
+	else
 	{
-		int i;
-		int quadratic;
-		for(i = 1; i < hashmod; i++)
-		{
-			quadratic = ((toInsert % hashmod) + (i*i)) % hashmod;
-			if(table[quadratic] == -1)
-				table[quadratic] = toInsert;
-		}		
+		hashres = toInsert % hashmod;
+		if(table[hashres] == -1)
+			table[hashres] = toInsert;
+		
+		else 
+			table[hash(toInsert)] = toInsert;			
+	}
+}	
+
+int Hash::hash(int x)
+{
+	int quadratic;
+	for(int i = 1; i < hashmod; i++)
+	{
+		quadratic = ((x % hashmod) + (i*i)) % hashmod;
+		if(table[quadratic] == -1)
+			return quadratic;
+	}		 
+}
+/**
+void Hash::remove(int a)
+{ 	
+	if(!contains(a))
+		std::cout << "Element " << a << " does not exist in table, cannot remove." << std::endl;
+	else
+	{
+		table[index] = -1;
+		flags[index] = 1;		
+		std::cout << "Element " << a << " successfully removed from table." << std::endl;
 	}
 }
-
-bool Hash::contains(int f)
+**/
+bool Hash::contains(int f)      			/// TO-DO: FIX REMOVE AND CONTAINS METHODS
 {
 	for(int p = 0; p < hashmod; p++)
 		if (table[p] == f)
 			return 1;
-	return 0;
+	return 0;  
+	
+ 	/* int searched = f % hashmod;
+	if(table[searched] == f)
+		return 1; 
+	else if(flags[searched] == 0)
+		contains(hash(f));
+	
+	return 0; */
 }
 
 void Hash::print()
@@ -81,5 +99,4 @@ void Hash::print()
 			std::cout << i <<": " << table[i] <<" flag = false\n";
 		else std::cout << i <<": " << table[i] <<" flag = true\n";
 	}
-
 }
