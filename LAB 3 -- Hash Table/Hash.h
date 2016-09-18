@@ -1,8 +1,8 @@
 /**
-*	@file :
+*	@file :	Hash.h
 *	@author :  Victor Berger da Silva
-*	@date :
-*
+*	@date :	September 18, 2016
+*	Header file for Hash class
 */
 
 
@@ -16,11 +16,13 @@ class Hash
 	public:
 	
 	Hash(int k);
+	~Hash();
 	void print();
 	void insert(int toInsert);
 	bool contains(int x);
+	int search(int x);
 	bool isfull();
-	int hash(int x);
+	int hash (int x, int value);
 	void remove(int a);
 
 

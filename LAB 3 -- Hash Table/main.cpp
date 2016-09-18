@@ -1,8 +1,9 @@
 /**
 *	@file : main.cpp
 *	@author :  Victor Berger da Silva
-*	@date :
-*	Purpose:
+*	@date : September 18, 2016
+*	Purpose: main file for a Hash Table program
+	EECS 560 - LAB 3 
 */
 
 #include "Hash.h"
@@ -10,6 +11,7 @@
 #include <fstream>
 #include <string>
 using namespace std;
+
 /*
 *	Helper method, prints menu. On a loop called from main().
 */
@@ -25,12 +27,12 @@ void print()
  */
 int main()
 {
-	int selection;
-	int number;
-	int headOfInput;
-	int toInsert;
-	int toDelete;
-
+	int selection;   // controls menu loop
+	int number;		 // initial insertion of values from text file
+	int headOfInput; // first value on text file, passed to the Hash class as its mod
+	int toInsert;    // variable to be inserted 
+	int toDelete;	 // variable to be deleted
+	
 	ifstream myFile;	
 	myFile.open("data.txt");
 	myFile >> headOfInput;
@@ -52,12 +54,12 @@ int main()
 			cin >> toInsert;
 			myHash.insert(toInsert);
 			break;
-/* 			
+			
 			case 2: // DELETE/REMOVE
 			cout << "Which number do you want to remove from the hash table?\nSelection: ";
 			cin >> toDelete;
 			myHash.remove(toDelete);
-			break; */
+			break; 
 			
 			case 3: // PRINT
 	    	myHash.print();
@@ -66,14 +68,7 @@ int main()
 			case 4: // EXIT
 			cout << "Program exit.\n";
 			break;
-			
-			case 5: 
-			cout << "CONTAINS: 5" << myHash.contains(5) << endl;
-			cout << "CONTAINS: 56" << myHash.contains(56) << endl;
-			cout << "CONTAINS: 10" << myHash.contains(10) << endl;
-			cout << "CONTAINS: 42" << myHash.contains(42) << endl;
-			break;
-			
+
 			default: // USER ENTERED INTEGER OTHER THAN 1, 2, 3, 4
 			cout << "Invalid input, try again.\n";
 			break;  
