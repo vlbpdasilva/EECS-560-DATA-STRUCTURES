@@ -11,11 +11,6 @@
 
 #include "Node.h"
 
-enum Order
-{
-    pre_order, in_order, level_order
-};
-
 class BST
 
 {
@@ -26,6 +21,7 @@ class BST
         void search(int x);
         void preOrder();
         void inOrder();
+        void levelOrder();
 	
 
 	private:
@@ -33,6 +29,7 @@ class BST
         void insertHelper(int x, Node* subtree);
         void preOrderHelper(Node* subtree);
         void inOrderHelper(Node* subtree);
+        void levelOrderHelper(Node* subtree);
 	void remove(Node* n);
         Node* search(int x, Node* subtree);
 

@@ -7,6 +7,7 @@
 
 #include "BST.h"
 #include "Node.h"
+#include "Queue.h"
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -39,6 +40,7 @@ int main(int argc, char** argv)
     myFile.open("data.txt");
     while(myFile >> number)    
         myBST->insert(number);
+
     
     do
     {
@@ -57,6 +59,15 @@ int main(int argc, char** argv)
                 break;
             case 6:
                 myBST->inOrder();
+                break;
+            case 7:
+                myBST->levelOrder();
+                break;
+            case 8:
+                cout << "Bye bye.\n";
+                break;
+            default: 
+                cout <<"Invalid input, try again.\n";
                 break;
         }
     }

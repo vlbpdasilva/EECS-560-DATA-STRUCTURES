@@ -10,8 +10,9 @@
 
 Node::Node()
 {
-    this->m_left=nullptr;
-    this->m_right=nullptr;
+    this->m_left = nullptr;
+    this->m_right = nullptr;
+    this->next = nullptr;
 }
 
 void Node::setValue(int i)
@@ -42,4 +43,14 @@ void Node::setRight(Node* right)
 Node* Node::getRight()
 {
     return this->m_right;
+}
+
+void Node::setNext(Node* n)
+{
+    this->next = n;
+}
+
+Node* Node::getNext()
+{
+    return this->next;
 }

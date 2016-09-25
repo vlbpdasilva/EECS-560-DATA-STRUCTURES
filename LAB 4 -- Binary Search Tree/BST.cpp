@@ -7,6 +7,7 @@
 
 #include "BST.h"
 #include "Node.h"
+#include "Queue.h"
 #include <iostream>
 using namespace std;
 
@@ -115,4 +116,44 @@ void BST::inOrderHelper(Node* subtree)
     inOrderHelper(subtree->getRight()); 
 }
 
+void BST::levelOrder()
+{
+    levelOrderHelper(root);
+}
+
+void BST::levelOrderHelper(Node* subtree)
+{
+    Queue* myQueue = new Queue();
     
+    Node* temp = new Node();
+
+   
+    if(subtree)
+        myQueue->add(root);
+
+    while(!myQueue->isEmpty())
+    {
+        temp = myQueue->pop();
+        cout << temp->getValue() << " " ;
+        if(temp->getLeft())
+            myQueue->add(temp->getLeft());
+        if(temp->getRight())
+            myQueue->add(temp->getRight());
+            
+    }    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

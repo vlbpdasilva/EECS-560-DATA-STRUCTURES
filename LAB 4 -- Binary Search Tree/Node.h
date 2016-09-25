@@ -21,9 +21,12 @@ class Node
         Node* getLeft();
         void setRight(Node* right);
         Node* getRight();
+        void setNext(Node* n);
+        Node* getNext();
 
 	private:
         int m_value;
+        Node* next;
         Node* m_left;
         Node* m_right;
 	
