@@ -17,6 +17,10 @@ Queue::Queue()
     m_back = nullptr;
 }
 
+Queue::~Queue()
+{
+}
+
 void Queue::add (Node* n)
 {    
     if(!m_front)

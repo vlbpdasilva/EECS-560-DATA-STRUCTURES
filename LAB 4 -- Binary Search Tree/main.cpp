@@ -33,6 +33,7 @@ int main(int argc, char** argv)
     int selection;
     int toInsert;
     int toRemove;
+    int toSearch;
 	
     BST* myBST = new BST();
     
@@ -40,7 +41,6 @@ int main(int argc, char** argv)
     myFile.open("data.txt");
     while(myFile >> number)    
         myBST->insert(number);
-
     
     do
     {
@@ -53,6 +53,17 @@ int main(int argc, char** argv)
                 cout << "Please insert the number that you want to be inserted in the tree:\nSelection: ";
                 cin >> toInsert;
                 myBST->insert(toInsert);
+                break;
+            case 2:
+                cout << "Which number do you like to remove from the tree?\nSelection: ";
+                cin >> toRemove;
+                myBST->remove(toRemove);
+                break;
+            case 3:
+                myBST->deleteMin();
+                break;
+            case 4: 
+                myBST->deleteMax();
                 break;
             case 5: 
                 myBST->preOrder();
@@ -72,4 +83,9 @@ int main(int argc, char** argv)
         }
     }
     while(selection != 8);
+    
+    myFile.close();
+    delete myBST;
+    
+    return 0;
 }
