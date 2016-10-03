@@ -26,10 +26,11 @@ class Heap
 		void deleteMax();
 		void remove(int value);
 		int find_last_element_index();
+		void goingUp(int x);
 
 	private:
         int array[500];
-
+		void remove(int value, bool all);
 };
 
 #endif

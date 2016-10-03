@@ -20,17 +20,28 @@ Heap::~Heap()
 {
 }
 
-void Heap::builder(int a[], int b)
+void Heap::builder(int a[], int b) /// CONSTRUCTS THE INITIAL HEAP, ONLY CALLED ONCE
 {
     for(int i = 0; i < 500; i++)
 		array[i] = -1;
     
 	for(int i = 0; i < b; i++)
 		array[i] = a[i];    
-    
-	int i = std::floor(b/5) + 1;
-	for(i; i <= b; i++)
-		heapify(b-i); 
+
+	int temp;
+	
+	for (int j = 0; j < 500; j++)
+		if(!hasChildren(j+1))
+		{
+			temp = j;
+			break;
+		}
+
+	for (int a = temp; a >= 0; a--)
+		heapify(a);
+	
+	for (int a = temp; a >= 0; a--)
+		goDown(a);
 }   
 
 bool Heap::hasChildren(int a)
@@ -60,7 +71,7 @@ void Heap::deleteMax()
 	array[last_element_index] = -1;
 	
 	for (int i = last_element_index-1; i >= 0; i--)
-		heapify(i);
+		goingUp(i);
 }
 
 int Heap::find_last_element_index()
@@ -73,39 +84,50 @@ int Heap::find_last_element_index()
 void Heap::insert(int x)
 {
 	for(int i = 0; i < 500; i++)
-	{
 		if(array[i] == -1)
 		{
 			array[i] = x;
+			goingUp(i);
 			break;
 		}
-	}
-	heapify(search(x));
 }
 
-void Heap::heapify(int x)
+void Heap::heapify(int x) // GOING UP
 {	
-	if(x==0) return;
+
 	int element = array[x];           		    // x --> index, element --> array[index]
 	int parent_index = floor((x-1)/5);
 	int parent = array[parent_index];
 	
-	if(element < parent)
+	int child_value;
+	int children_index[5];
+	int smallestChild;
+
+	for(int i = 0; i < 5; i++)
 	{
-		int temp = array[x];
-		array[x] = array[parent_index];
-		array[parent_index] = temp;
-		heapify(parent_index);
-	}	
+		children_index[i] = -1;
+		child_value = array[(5*x)+i+1];
+		if(child_value != -1)
+			children_index[i] = child_value;
+	}
+	
+	for(int a = 0; a < 5; a++)
+		if(children_index[a+1] < children_index[a])
+			smallestChild = children_index[a+1];		
+	
+	if(array[x] > smallestChild)
+		swap(array[x], array[search(smallestChild)]);
+	
 }
-int Heap::search(int x)
+
+int Heap::search(int x) // will return -1 if value not found; will only return first index if duplicate
 {
     for(int i = 0; i < 500; i++)
         if (array[i] == x) return i;
     return -1;
 }
 
-void Heap::levelorder()
+void Heap::levelorder() // prints tree-like diagram
 {	
 	if(array[0] == -1)
 		cout << "Heap is empty, cannot traverse.\n";
@@ -131,18 +153,19 @@ void Heap::levelorder()
 			}
 			cout << endl;
 		}
-	}
+	} 
 }
 
-void Heap::deleteMin()
+void Heap::deleteMin() /// calls remove() on root, without removing duplicates
 {
 	if(array[0] == -1)
 		cout << "Heap is empty, cannot delete.";
 	else	
-		remove(array[0]);
+		remove(array[0],0);
 }
 
-void Heap::remove(int value)
+///PRIVATE:
+void Heap::remove(int value, bool all) /// if all == 1, will remove all duplicates
 {
 	int value_index = search(value);
 	if(value_index == -1)
@@ -151,15 +174,38 @@ void Heap::remove(int value)
 		return;
 	}
 	int last_element_index = find_last_element_index();
+	
 	array[value_index] = array[last_element_index];
 	array[last_element_index] = -1;
-	
-	goDown(value_index);	
-	for (int i = last_element_index-1; i >= 0; i--)
-		heapify(i);
+
+	goDown(value_index);
+	if(all)
+		while(search(value) != -1) 
+			remove(value);	
 }
 
-void Heap::goDown(int hole_index)
+void Heap::remove(int value) // calls private remove, with specific flag for duplicates
+{
+	remove(value, 1);
+}
+
+void Heap::goingUp(int x) // goes up on heap, swapping if needed, all the way to root. Recursive
+{
+	if(x==0) return;
+	int element = array[x];           		    // x --> index, element --> array[index]
+	int parent_index = floor((x-1)/5);
+	int parent = array[parent_index];
+	
+	if(element < parent)
+	{
+		int temp = array[x];
+		array[x] = array[parent_index];
+		array[parent_index] = temp;
+		goingUp(parent_index);
+	}
+}
+
+void Heap::goDown(int hole_index) // goes down on heap, swapping if needed, all the way to leaves. Recursive
 {
 	if(!hasChildren(hole_index)) return;
 	
@@ -170,17 +216,11 @@ void Heap::goDown(int hole_index)
 		if(array[(5*hole_index + i + 1)] != -1)
 			children_index[i] = (5*hole_index + i + 1);
 	}
-	
-	int temp;
 
 	for(int j = 0; j < 5; j++)
-	{
 		if(children_index[j] != -1 && array[children_index[j]] < array[hole_index])
 		{
-			temp = array[children_index[j]];
-			array[children_index[j]] = array[hole_index];
-			array[hole_index] = temp;
-			goDown(hole_index);
+			swap(array[children_index[j]],array[hole_index]);
+			goDown(children_index[j]);
 		} 
-	}
 }
