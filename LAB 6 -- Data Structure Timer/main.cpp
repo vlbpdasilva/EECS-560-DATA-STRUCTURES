@@ -9,6 +9,6 @@
 int main(int argc, char** argv)
 {
     RNG_Timer* myTimer = new RNG_Timer();	
-	delete myTimer;        
+    delete myTimer;        
     return 0;
 }

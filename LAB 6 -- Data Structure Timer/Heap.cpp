@@ -14,34 +14,19 @@ using namespace std;
 Heap::Heap()
 {
     int array[500];
+    int size = 0;
+    
 }
 
 Heap::~Heap()
 {
+    builder();
 }
 
-void Heap::builder(int a[], int b) /// CONSTRUCTS THE INITIAL HEAP, ONLY CALLED ONCE
+void Heap::builder() /// CONSTRUCTS THE INITIAL HEAP, ONLY CALLED ONCE
 {
-    for(int i = 0; i < 500; i++)
+        for(int i = 0; i < 500; i++)
 		array[i] = -1;
-    
-	for(int i = 0; i < b; i++)
-		array[i] = a[i];    
-
-	int temp;
-	
-	for (int j = 0; j < 500; j++)
-		if(!hasChildren(j+1))
-		{
-			temp = j;
-			break;
-		}
-
-	for (int a = temp; a >= 0; a--)
-		heapify(a);
-	
-	for (int a = temp; a >= 0; a--)
-		goDown(a);
 }   
 
 bool Heap::hasChildren(int a)
@@ -53,48 +38,41 @@ bool Heap::hasChildren(int a)
 }
 
 void Heap::deleteMax()
-{
-	if(array[0] == -1) return;
-	
-	int last_element_index = find_last_element_index();
-	int first_leaf_index = floor((last_element_index-1)/5) + 1;
+{    
+	if(size == 0) return;       
+	int first_leaf_index = (size-1)/5 + 1;
 	int max = array[first_leaf_index];
-	int max_index;
-	for(int j = first_leaf_index; j <= last_element_index; j++)
-		if(array[j] > max)
-		{	
-			max = array[j];
-			max_index = j;
-		}
-
-	array[max_index] = array[last_element_index];
-	array[last_element_index] = -1;
+	int max_index = first_leaf_index;
+        
+	for(first_leaf_index; first_leaf_index < size; first_leaf_index++)
+            if(array[first_leaf_index] > max)
+            {	
+                max = array[first_leaf_index];
+                max_index = first_leaf_index;
+            }
+		
+	//array[max_index] = array[size - 1];
+        size--;
 	
-	for (int i = last_element_index-1; i >= 0; i--)
-		goingUp(i);
-}
-
-int Heap::find_last_element_index()
-{
-	for (int i = 0; i < 500; i++)
-		if(array[i] == -1)
-			return (i-1);
+        while(max_index > 0)
+        {
+            goingUp(max_index);
+            max_index = (max_index - 1)/5;
+        }
 }
 
 void Heap::insert(int x)
 {
-	for(int i = 0; i < 500; i++)
-		if(array[i] == -1)
-		{
-			array[i] = x;			
-			break;
-		}
+    if(size >= 500) return;
+    
+    array[size] = x;
+    size++;
 }
 
 void Heap::heapify(int x) // GOING UP
 {	
 
-	int element = array[x];           		    // x --> index, element --> array[index]
+	int element = array[x];           		    
 	int parent_index = floor((x-1)/5);
 	int parent = array[parent_index];
 	
@@ -158,29 +136,27 @@ void Heap::levelorder() // prints tree-like diagram
 void Heap::deleteMin() /// calls remove() on root, without removing duplicates
 {
 	if(array[0] == -1)
-		cout << "Heap is empty, cannot delete.";
+            return;
 	else	
-		remove(array[0],0);
+            remove(array[0],0);
 }
 
 ///PRIVATE:
 void Heap::remove(int value, bool all) /// if all == 1, will remove all duplicates
 {
 	int value_index = search(value);
-	if(value_index == -1)
-	{
-		cout << "Value not found on heap, cannot delete. \n";
-		return;
-	}
-	int last_element_index = find_last_element_index();
+	if(value_index == -1) return;
+
+	int last_element_index = size;
+        if(last_element_index == -1) return;
 	
 	array[value_index] = array[last_element_index];
 	array[last_element_index] = -1;
 
-	goDown(value_index);
+ //       goDown(value_index);
 	if(all)
-		while(search(value) != -1) 
-			remove(value);	
+            while(search(value) != -1) 
+                remove(value,1);	
 }
 
 void Heap::remove(int value) // calls private remove, with specific flag for duplicates

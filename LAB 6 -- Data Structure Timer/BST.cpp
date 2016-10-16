@@ -26,8 +26,8 @@ void BST::memdelete(Node* n)
         if(!n)
         return;
     
-    memdelete(n->getRight());
-    memdelete(n->getLeft());
+    if(n->getRight()) memdelete(n->getRight());
+    if(n->getLeft()) (n->getLeft());
     delete n;
 
 }
@@ -118,15 +118,9 @@ int BST::getMaxValue()
 
 void BST::remove(int a)
 {    
-    if(!root) 
-        cout << "Tree is empty, nothing to remove.\n";
-    else if(!search(a))
-        cout << "Element " << a << " not found on tree, cannot remove.\n";    
-    else
-    {
-        removeHelper(a, search(a));
-        cout << "Element " << a << " succesfully removed.\n";
-    }
+    if(!root) return;
+    else if(!search(a)) return;
+    else removeHelper(a, search(a));
 }
 
 void BST::deleteMin()
@@ -142,62 +136,54 @@ void BST::deleteMax()
 
 Node* BST::removeHelper(int a, Node* n)
 {    
-    Node* parent = new Node();
-    parent = root;
-    
-    Node* temp = new Node();
-    temp = n;
-    
-    
-    while(parent != temp)
+    while(root != n)
     {
-        if(n == root)
-            break;
-        
-        if(a < parent->getValue())
+        if(a < root->getValue())
         {
-            if (parent->getLeft() == temp || parent->getRight() == temp ) break;
-            parent = parent->getLeft();
-            if (parent->getLeft() == temp || parent->getRight() == temp ) break;
+            if (root->getLeft() == n || root->getRight() == n) break;
+            root = root->getLeft();
+            if (root->getLeft() == n || root->getRight() == n) break;
         }
         else
         {
-            if (parent->getLeft() == temp || parent->getRight() == temp ) break;
-            parent = parent->getRight();
-            if(parent->getLeft() == temp || parent->getRight() == temp) break;
+            if (root->getLeft() == n || root->getRight() == n) break;
+            root = root->getRight();
+            if(root->getLeft() == n || root->getRight() == n) break;
         }
     }
     
     // Removing a leaf node:
-    if(!temp->getLeft() && !temp->getRight())
+    if(!n->getLeft() && !n->getRight())
     {
-        if(parent->getRight() == temp)
-            parent->setRight(nullptr);
-        if(parent->getLeft() == temp)
-            parent->setLeft(nullptr);
+        if(root->getRight() == n)
+            root->setRight(nullptr);
+        if(root->getLeft() == n)
+            root->setLeft(nullptr);
     }
         
     // Removing node with exactly one child: 
-    if(!temp->getLeft() != !temp->getRight())
+    else if(!n->getLeft() != !n->getRight())
     {
         Node* temp2 = new Node();
-        if(temp->getRight())
-            temp2 = temp->getRight();
+        if(n->getRight())
+            temp2 = n->getRight();
 
         else
-            temp2 = temp->getLeft();
+            temp2 = n->getLeft();
         
         n = temp2;
         
-        if(parent->getLeft() == temp)
-            parent->setLeft(temp2);
+        if(root->getLeft() == n)
+            root->setLeft(temp2);
         else
-            parent->setRight(temp2);   
-
+            root->setRight(temp2);   
+        
+        temp2 = nullptr;
+        delete temp2;
     }
     
     // Removing node with 2 children:
-    if(temp->getLeft() && temp->getRight())
+    else if(n->getLeft() && n->getRight())
     {        
         Node* temp3 = new Node();
         temp3 = getMin(n->getRight());
@@ -205,10 +191,11 @@ Node* BST::removeHelper(int a, Node* n)
         n->setValue(temp3->getValue());
         
         n->setRight(removeHelper(temp3->getValue(), n->getRight()));
-    }
         
-        return n;
-
+        temp3 = nullptr;
+        delete temp3;
+    }        
+    return n;
 }
 
 void BST::preOrder()

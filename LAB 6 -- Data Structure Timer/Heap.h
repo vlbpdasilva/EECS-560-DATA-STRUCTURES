@@ -15,7 +15,7 @@ class Heap
 	public:
         Heap();
         ~Heap();        
-        void builder(int a[], int b);
+        void builder();
         void heapify(int x);
         int  search(int x);
         void levelorder();
@@ -25,11 +25,11 @@ class Heap
 	bool hasChildren(int a);
 	void deleteMax();
 	void remove(int value);
-	int find_last_element_index();
         void goingUp(int x);
 
 	private:
         int array[500];
+        int size;
 	void remove(int value, bool all);
 };
 
