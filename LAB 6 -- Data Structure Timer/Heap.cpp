@@ -86,8 +86,7 @@ void Heap::insert(int x)
 	for(int i = 0; i < 500; i++)
 		if(array[i] == -1)
 		{
-			array[i] = x;
-			goingUp(i);
+			array[i] = x;			
 			break;
 		}
 }
