@@ -13,27 +13,27 @@ using namespace std;
 
 Heap::Heap()
 {
-    int array[500];
-    int size = 0;
-    
+    //int array[500000];
+    size = 0;
+        
 }
 
 Heap::~Heap()
 {
-    builder();
 }
 
 void Heap::builder() /// CONSTRUCTS THE INITIAL HEAP, ONLY CALLED ONCE
 {
-        for(int i = 0; i < 500; i++)
+        for(int i = 0; i < 500000; i++)
 		array[i] = -1;
 }   
 
 bool Heap::hasChildren(int a)
-{
+{	
 	for(int i = 1; i <= 5; i++)
-		if(array[(5*a+i)] != -1)
+		if(array[(5*a+i)] != -1){
 			return 1;
+		}
 	return 0;
 }
 
@@ -63,7 +63,7 @@ void Heap::deleteMax()
 
 void Heap::insert(int x)
 {
-    if(size >= 500) return;
+    if(size >= 500000) return;
     
     array[size] = x;
     size++;
@@ -99,7 +99,14 @@ void Heap::heapify(int x) // GOING UP
 
 int Heap::search(int x) // will return -1 if value not found; will only return first index if duplicate
 {
-    for(int i = 0; i < 500; i++)
+    for(int i = 0; i < 500000; i++)
+        if (array[i] == x) return i;
+    return -1;
+}
+
+int Heap::search(int x, int beg) // will return -1 if value not found; will only return first index if duplicate
+{
+    for(int i = beg; i < 500000; i++)
         if (array[i] == x) return i;
     return -1;
 }
@@ -138,30 +145,35 @@ void Heap::deleteMin() /// calls remove() on root, without removing duplicates
 	if(array[0] == -1)
             return;
 	else	
-            remove(array[0],0);
+            remove(array[0],0,0);
 }
 
 ///PRIVATE:
-void Heap::remove(int value, bool all) /// if all == 1, will remove all duplicates
+void Heap::remove(int value, bool all, int value_index) /// if all == 1, will remove all duplicates
 {
-	int value_index = search(value);
+	
 	if(value_index == -1) return;
 
-	int last_element_index = size;
+	int last_element_index = size - 1;
         if(last_element_index == -1) return;
 	
 	array[value_index] = array[last_element_index];
 	array[last_element_index] = -1;
 
- //       goDown(value_index);
-	if(all)
-            while(search(value) != -1) 
-                remove(value,1);	
+	size--;
+
+    goDown(value_index);
+	if(all){
+			value_index = search(value, value_index);
+            
+            remove(value,1, value_index);
+        }
 }
 
 void Heap::remove(int value) // calls private remove, with specific flag for duplicates
 {
-	remove(value, 1);
+	int value_index = search(value);
+	remove(value, 1, value_index);
 }
 
 void Heap::goingUp(int x) // goes up on heap, swapping if needed, all the way to root. Recursive
@@ -182,6 +194,9 @@ void Heap::goingUp(int x) // goes up on heap, swapping if needed, all the way to
 
 void Heap::goDown(int hole_index) // goes down on heap, swapping if needed, all the way to leaves. Recursive
 {
+	if(5 * hole_index + 1 > 500000)
+		return;
+
 	if(!hasChildren(hole_index)) return;
 	
 	int children_index[5];

@@ -88,7 +88,7 @@ void RNG_Timer::operationTimer(int n, BST* myBST, Heap* myHeap)
     int randomInt;
     Timer myTimer;
 
-    if(choice < 0.25)
+    if(choice > 3)// 0.25)
     {
 
         cout << "### Time to perform deletemin operations:\n  BST: ";
@@ -105,7 +105,7 @@ void RNG_Timer::operationTimer(int n, BST* myBST, Heap* myHeap)
             myHeap->deleteMin();
         myTimer.printTime(myTimer.stop());          
     }
-    else if (choice < 0.5)
+    else if (choice > 5)//0.5)
     { 
         cout << "### Time to perform deletemax operations:\n  BST: ";
             
@@ -122,7 +122,7 @@ void RNG_Timer::operationTimer(int n, BST* myBST, Heap* myHeap)
             myHeap->deleteMax();
         myTimer.printTime(myTimer.stop());  		
     }
-    else if(choice < 0.75)
+    else if(choice < 1)//0.75)
     {
         randomInt = rand() % (4 * n) + 1;
         cout << "### Time to perform remove operations:\n  BST: ";
