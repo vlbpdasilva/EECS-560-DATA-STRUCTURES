@@ -9,13 +9,15 @@ class RNG_Timer
 {
 	public:
         RNG_Timer();
-		~RNG_Timer();
+        ~RNG_Timer();
 
 
 	private:
         int* n_values;
-		void insertTimer();
-		void operationTimer(int n, BST* myBST, Heap* myHeap);
+        void insertTimer();
+        void operationTimer(int n, BST* myBST, Heap* myHeap);
+        double opTimerBST;
+        double opTimerHeap;
 };
 
 #endif

@@ -15,6 +15,8 @@ RNG_Timer::RNG_Timer()
     n_values[1] = 100000;
     n_values[2] = 200000;
     n_values[3] = 400000;
+    opTimerBST = 0;
+    opTimerHeap = 0;
     insertTimer();
     delete n_values;
     std::cout << std::endl << std::endl;
@@ -83,88 +85,56 @@ void RNG_Timer::insertTimer()
 void RNG_Timer::operationTimer(int n, BST* myBST, Heap* myHeap)
 {
     srand(time(NULL));
-    double choice = (double)rand() / (RAND_MAX);
+    double choice;
     int times = 0.1 * n;
     int randomInt;
     Timer myTimer;
 
-    if(choice > 3)// 0.25)
-    {
-
-        cout << "### Time to perform deletemin operations:\n  BST: ";
-            
-        myTimer.start();		
-        for(int i = 0; i < times; i++)
+    for(int i = 0; i < times; i++)
+    {    
+        choice = (double)rand() / (RAND_MAX);
+        if(choice < 0.25)
+        {
+            myTimer.start();		
             myBST->deleteMin();
-        myTimer.printTime(myTimer.stop()); 
-		
-        cout << "  Heap: ";
-		
-        myTimer.start();
-        for(int i = 0; i < times; i++)
+            opTimerBST += myTimer.stop();                    
+            myTimer.start();
             myHeap->deleteMin();
-        myTimer.printTime(myTimer.stop());          
-    }
-    else if (choice > 5)//0.5)
-    { 
-        cout << "### Time to perform deletemax operations:\n  BST: ";
-            
-        myTimer.start();		
-        for(int i = 0; i < times; i++)
+            opTimerHeap += myTimer.stop();
+        }
+        else if (choice < 0.5)
+        { 
+            myTimer.start();		
             myBST->deleteMax();
-                
-        myTimer.printTime(myTimer.stop());
-		
-        cout << "  Heap: ";
-		
-        myTimer.start();
-        for(int i = 0; i < times; i++)
+            opTimerBST += myTimer.stop();
+            myTimer.start();
             myHeap->deleteMax();
-        myTimer.printTime(myTimer.stop());  		
-    }
-    else if(choice < 1)//0.75)
-    {
-        randomInt = rand() % (4 * n) + 1;
-        cout << "### Time to perform remove operations:\n  BST: ";
-		
-        myTimer.start();	
-        for(int i = 0; i < times; i++)
+            opTimerHeap += myTimer.stop();
+        }
+        else if(choice < 0.75)
         {
+            randomInt = rand() % (4 * n) + 1;     
+            myTimer.start();	
             myBST->remove(randomInt);
-            randomInt = rand() % (4 * n) + 1;
-        }
-        myTimer.printTime(myTimer.stop());
-		
-        cout << "  Heap: ";		
-        myTimer.start();
-        for(int i = 0; i < times; i++)
-        {
+            opTimerBST += myTimer.stop();	
+            myTimer.start();
             myHeap->remove(randomInt);
-            randomInt = rand() % (4 * n) + 1;
+            opTimerHeap += myTimer.stop();
         }
-        myTimer.printTime(myTimer.stop());          
-    }
-    else
-    { 
-        randomInt = rand() % (4 * n) + 1;
-        cout << "### Time to perform insert operations:\n  BST: ";
-		
-        myTimer.start();		
-        for(int i = 0; i < times; i++)
-        {
+        else
+        { 
+            randomInt = rand() % (4 * n) + 1;   
+            myTimer.start();		
             myBST->insert(randomInt);
-            randomInt = rand() % (4 * n) + 1;
-        }
-        myTimer.printTime(myTimer.stop());
-		
-        cout << "  Heap: ";
-		
-        myTimer.start();
-        for(int i = 0; i < times; i++)
-        {
+            opTimerBST += myTimer.stop();
+            myTimer.start();
             myHeap->insert(randomInt);
-            randomInt = rand() % (4 * n) + 1;
         }
-        myTimer.printTime(myTimer.stop());  		
     }  
+    
+    cout << "Time for " << times << " insertion/deletion operations on BST: "<< opTimerBST << endl;
+    cout << "Time for " << times << " insertion/deletion operations on Min-5-Heap: "<< opTimerHeap << endl;
+    
+    opTimerBST = 0;
+    opTimerHeap = 0;
 }
