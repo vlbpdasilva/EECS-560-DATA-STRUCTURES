@@ -13,8 +13,8 @@
 */
 void print()
 {
-	std::cout << "----------------\nPlease choose one of the following commands: \n1 - Insert\n2 - DeleteMin\n 3 - DeleteMax";
-	std::cout << "\n4 - Level Order Traversal\n5 - Exit\nSelection: ";
+    std::cout << "\n----------------\nPlease choose one of the following commands: \n1 - Insert\n2 - DeleteMin\n3 - DeleteMax";
+    std::cout << "\n4 - Level Order Traversal\n5 - Exit\nSelection: ";
 }
 
 /*
@@ -28,7 +28,7 @@ int main()
 	std::ifstream myFile;	
 	myFile.open("data.txt");
     	while(myFile >> number)    
-		size++;
+            size++;
 
 	int values[size];
 		
@@ -37,42 +37,43 @@ int main()
 		
     	while (myFile >> number) 
 	{
-        	vals[counter] = number;
-        	counter++;
+            values[counter] = number;
+            counter++;
     	}
 	
 	myFile.close();	
 		
-	MinMaxHeap myHeap();
+	MinMaxHeap* myMinMaxHeap = new MinMaxHeap();
+        myMinMaxHeap->build(values, size);
 
 	do
 	{
-		print();
-		std::cin >> selection;	
+            print();
+            std::cin >> selection;	
 			
-		switch(selection)
-                {
-                    case 1:		
-			std::cout << "Enter value to insert: ";
-			std::cin >> insertValue;
-			myHeap.insert(insertValue);
-                        break;                        
-                    case 2:                          
-			myHeap.deleteMin();
-                        break;                        
-                    case 3:                          
-                        myHeap.deleteMax();
-                        break;                    
-                    case 4:  
-                        myHeap.levelOrder();
-                        break;                
-		    case 5:  
-			std::cout<< "Program exit\n";
-                        break;		
-                    default: 
-			std::cout << "Invalid input, try again\n";
-                        break;
-                }       
+            switch(selection)
+            {
+                case 1:		
+                    std::cout << "Enter value to insert: ";
+                    std::cin >> insertValue;
+                  //  myMinMaxHeap->insert(insertValue);
+                    break;                        
+                case 2:                          
+                    //myHeap.deleteMin();
+                    break;                        
+                case 3:                          
+                    //myHeap.deleteMax();
+                    break;                    
+                case 4:  
+                    myMinMaxHeap->levelOrder();
+                    break;                
+                case 5:  
+                    std::cout<< "Program exit\n";
+                    break;		
+                default: 
+                    std::cout << "Invalid input, try again\n";
+                    break;
+            }       
 		
 	}
 	while(selection!=5);	
