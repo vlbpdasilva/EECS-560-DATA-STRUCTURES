@@ -41,21 +41,49 @@ void MinMaxHeap::trickleDown()
     bool minNode = ((int)(floor(log2(NonLeaf_index))) % 2 == 0) ? 1 : 0;
     
     int ChildOne_index, ChildTwo_index;
-    
-    if(2 * NonLeaf_index + 1 <= size) ChildOne_index = 2 * NonLeaf_index;
-    else ChildOne_index = -1;
-    if(2 * NonLeaf_index + 2 <= size) ChildTwo_index = 2 * NonLeaf_index + 1;
-    else ChildTwo_index = -1;
+    while(NonLeaf_index >= 1)
+    {    
+        minNode = ((int)(floor(log2(NonLeaf_index))) % 2 == 0) ? 1 : 0;
+                
+        if(2 * NonLeaf_index + 1 <= size) 
+            ChildOne_index = 2 * NonLeaf_index;
+        else ChildOne_index = -1;
+                
+        if(2 * NonLeaf_index + 2 <= size)
+            ChildTwo_index = 2 * NonLeaf_index + 1;
+        else ChildTwo_index = -1;
 
-    if(minNode)
-    {
-        if(ChildOne_index != -1 && ChildTwo_index == -1 && array[ChildOne_index] < array[NonLeaf_index])            
-            swap(array[ChildOne_index], array[NonLeaf_index]);
+        if(minNode)
+        {
+            cout <<"Min Node is " << array[NonLeaf_index] << endl;
+            if(ChildOne_index != -1 && ChildTwo_index == -1 && array[ChildOne_index] < array[NonLeaf_index])            
+                swap(array[ChildOne_index], array[NonLeaf_index]);
+            if(ChildOne_index != -1 && ChildTwo_index != -1)
+            {
+                if(array[ChildOne_index] < array[ChildTwo_index] && array[ChildOne_index] < array[NonLeaf_index])
+                    swap (array[ChildOne_index], array[NonLeaf_index]);
+                if(array[ChildTwo_index] < array[ChildOne_index] && array[ChildTwo_index] < array[NonLeaf_index])
+                    swap (array[ChildTwo_index], array[NonLeaf_index]);
+            }         
+        }
+        else
+        {
+            cout <<"Max Node is " << array[NonLeaf_index] << endl;
+            if(ChildOne_index != -1 && ChildTwo_index == -1 && array[ChildOne_index] > array[NonLeaf_index])   
+                swap(array[ChildOne_index], array[NonLeaf_index]);
+            
+            if(ChildOne_index != -1 && ChildTwo_index != -1)
+            {
+                if(array[ChildOne_index] > array[ChildTwo_index] && array[ChildOne_index] > array[NonLeaf_index])
+                    swap (array[ChildOne_index], array[NonLeaf_index]);
+                if(array[ChildTwo_index] > array[ChildOne_index] && array[ChildTwo_index] > array[NonLeaf_index])
+                    swap (array[ChildTwo_index], array[NonLeaf_index]);
+            }
+        }
         
+        levelOrder(); cout << endl << endl;
+        NonLeaf_index--;
     }
-
-    
-    
 }
 
 void MinMaxHeap::levelOrder()
