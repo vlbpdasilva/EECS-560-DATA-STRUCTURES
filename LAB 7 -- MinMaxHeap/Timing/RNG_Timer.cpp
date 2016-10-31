@@ -19,7 +19,7 @@ RNG_Timer::RNG_Timer()
     opTimerMinMaxHeap = 0;
     insertTimer();
     delete n_values;
-    std::cout << std::endl << std::endl;
+    cout << endl << endl;
 }
 
 RNG_Timer::~RNG_Timer()

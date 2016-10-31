@@ -68,7 +68,7 @@ void MinMaxHeap::insert(int a)
 
 void MinMaxHeap::trickleDown()
 {    
-    int NonLeaf_index = (size - 1) / 2;    
+    int NonLeaf_index = size / 2;    
     bool minNode, has_gc;
     int ChildOne_index, ChildTwo_index, min_gc_index, max_gc_index;
     int granchildren_index[4];
@@ -198,6 +198,7 @@ void MinMaxHeap::deleteMin()
             swap(array[1], array[second_smallest_index]);
             swap(array[second_smallest_index], array[size-1]);
         }
+
         size--;
     }   
 }
