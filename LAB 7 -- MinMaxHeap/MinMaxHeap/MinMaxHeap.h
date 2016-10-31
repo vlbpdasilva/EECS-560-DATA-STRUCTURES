@@ -17,14 +17,15 @@ public:
     ~MinMaxHeap();
     void build(int values[], int sizeBuilder);
     void levelOrder();
-    
-    
+    void deleteMin();
+    void deleteMax();
+    void insert(int a);
+        
 private:
     int size;
     int array[500000];
-    
     void trickleDown();
-    
+    void bubbleUp(int index);
 };
 
 #endif

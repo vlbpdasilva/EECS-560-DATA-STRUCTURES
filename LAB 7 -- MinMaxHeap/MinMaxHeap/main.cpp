@@ -56,20 +56,21 @@ int main()
                 case 1:		
                     std::cout << "Enter value to insert: ";
                     std::cin >> insertValue;
-                  //  myMinMaxHeap->insert(insertValue);
+                    myMinMaxHeap->insert(insertValue);
                     break;                        
                 case 2:                          
-                    //myHeap.deleteMin();
+                    myMinMaxHeap->deleteMin();
                     break;                        
                 case 3:                          
-                    //myHeap.deleteMax();
+                    myMinMaxHeap->deleteMax();
                     break;                    
                 case 4:  
+                    std::cout << "Level order:";
                     myMinMaxHeap->levelOrder();
                     break;                
                 case 5:  
                     std::cout<< "Program exit\n";
-                    break;		
+                    break;	
                 default: 
                     std::cout << "Invalid input, try again\n";
                     break;
@@ -77,5 +78,6 @@ int main()
 		
 	}
 	while(selection!=5);	
+        delete myMinMaxHeap;
 	return 0;    
 }
