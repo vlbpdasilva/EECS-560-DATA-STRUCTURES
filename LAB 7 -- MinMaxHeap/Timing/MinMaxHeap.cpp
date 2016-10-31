@@ -39,10 +39,7 @@ void MinMaxHeap::build(int values[], int sizeBuilder)
 void MinMaxHeap::insert(int a)
 {
     if(size >= _MAX_SIZE) 
-    {
-        cout << "Cannot insert, heap already full.\n";
         return;
-    }
     
     if(size - 2 == 0)
         array[1] = a;
@@ -162,7 +159,7 @@ void MinMaxHeap::trickleDown()
 void MinMaxHeap::deleteMin()
 {
     if(size-2 == 0) 
-        cout << "Heap is empty, nothing to delete." << endl;
+        return;
     else if(size-1 == 1)        
         size--;
     else if(size-1 == 2)
@@ -205,7 +202,7 @@ void MinMaxHeap::deleteMin()
 void MinMaxHeap::deleteMax()
 {
     if(size == 0) 
-        cout << "Heap is empty, nothing to delete." << endl;
+        return;
     else if(size < 4)
         size--;
     else
