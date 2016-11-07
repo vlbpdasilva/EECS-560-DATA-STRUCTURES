@@ -1,27 +1,27 @@
 /**
-*	@file : LeftistHeap.cpp
+*	@file : SkewHeap.cpp
 *	@author :  Victor Berger da Silva
 *	@date : 
 * 
 */
 
-#include "LeftistHeap.h"
+#include "SkewHeap.h"
 #include "Node.h"
 #include "Queue.h"
 #include <iostream>
 using namespace std;
 
-LeftistHeap::LeftistHeap()
+SkewHeap::SkewHeap()
 {
     m_root = nullptr;
 }
 
-LeftistHeap::~LeftistHeap()
+SkewHeap::~SkewHeap()
 {
    if(m_root) deleteHelper(m_root);
 }
 
-void LeftistHeap::deleteHelper(Node* n)
+void SkewHeap::deleteHelper(Node* n)
 {
     if(!n) return;
     
@@ -30,14 +30,14 @@ void LeftistHeap::deleteHelper(Node* n)
     delete n;    
 }
 
-void LeftistHeap::insert(int x)
+void SkewHeap::insert(int x)
 {
     Node* newNode = new Node();
     newNode->setValue(x);
     m_root = merge(m_root, newNode);
 }
 
-void LeftistHeap::deleteMin()
+void SkewHeap::deleteMin()
 {
     if(m_root)
     {
@@ -50,7 +50,7 @@ void LeftistHeap::deleteMin()
         cout << "Heap is empty, nothing to delete.";
 }
 
-Node* LeftistHeap::merge(Node* leftHeap, Node* rightHeap)
+Node* SkewHeap::merge(Node* leftHeap, Node* rightHeap)
 {
     if(!leftHeap) return rightHeap;
     if(!rightHeap) return leftHeap;
@@ -67,20 +67,15 @@ Node* LeftistHeap::merge(Node* leftHeap, Node* rightHeap)
     else
     {
         leftHeap->setRight(merge(leftHeap->getRight(), rightHeap));
-        if(leftHeap->getLeft()->getRank() < leftHeap->getRight()->getRank())
-        {
-            Node* temp = leftHeap->getLeft();
-            leftHeap->setLeft(leftHeap->getRight());
-            leftHeap->setRight(temp);
-        }
-        
-        leftHeap->setRank(leftHeap->getRight()->getRank() + 1);
+        Node* temp = leftHeap->getLeft();
+        leftHeap->setLeft(leftHeap->getRight());
+        leftHeap->setRight(temp);
     }
     
     return leftHeap;
 }
 
-void LeftistHeap::levelOrder()
+void SkewHeap::levelOrder()
 {
     if(!m_root)
         cout << "Heap is empty, nothing to display.";
@@ -91,7 +86,7 @@ void LeftistHeap::levelOrder()
     }
 }
 
-void LeftistHeap::levelOrderHelper(Node* n)
+void SkewHeap::levelOrderHelper(Node* n)
 {
     Queue* myQueue = new Queue();    
     Node* temp = new Node();
@@ -112,7 +107,7 @@ void LeftistHeap::levelOrderHelper(Node* n)
     delete myQueue;
 }
 
-void LeftistHeap::preOrder()
+void SkewHeap::preOrder()
 {
     if(!m_root)
         cout << "Heap is empty, nothing to display.";
@@ -123,7 +118,7 @@ void LeftistHeap::preOrder()
     }
 }
 
-void LeftistHeap::preOrderHelper(Node* n)
+void SkewHeap::preOrderHelper(Node* n)
 {
     if(!n) return;
     
@@ -132,7 +127,7 @@ void LeftistHeap::preOrderHelper(Node* n)
     preOrderHelper(n->getRight());
 }
 
-void LeftistHeap::inOrder()
+void SkewHeap::inOrder()
 {
     if(!m_root)
         cout << "Heap is empty, nothing to display.";
@@ -143,7 +138,7 @@ void LeftistHeap::inOrder()
     }
 }
 
-void LeftistHeap::inOrderHelper(Node* n)
+void SkewHeap::inOrderHelper(Node* n)
 {
     if(!n) return;
     
