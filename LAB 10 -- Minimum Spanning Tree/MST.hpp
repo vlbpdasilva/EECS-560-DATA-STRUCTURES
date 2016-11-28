@@ -29,7 +29,7 @@ MST::~MST()
 
 void MST::memdelete()
 {
-	 for(int a = _size; a > 0; --a)
+	for(int a = _size; a > 0; --a)
         delete[] _array;
     delete[] _array;
 }
@@ -43,8 +43,7 @@ void MST::Kruskal()
 {
     sizeAcc = 0;
     Edge set[_size], myEdge, tempEdge;
-    _disjSet = new Element[_size];
-    
+    _disjSet = new Element[_size];    
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
     
     for(int i = 0; i < _size; ++i)
@@ -66,7 +65,7 @@ void MST::Kruskal()
         
         if(findCycle(tempEdge))
         {
-        		performUnion(findEdge(tempEdge.a), findEdge(tempEdge.b));
+        	performUnion(findEdge(tempEdge.a), findEdge(tempEdge.b));
             set[sizeAcc] = tempEdge;
             ++sizeAcc;
         }
@@ -78,11 +77,11 @@ void MST::Kruskal()
         while(sizeAcc < _size - 1)
         {
             Edge finalEdge = set[sizeAcc];
+			++sizeAcc;
             std::cout << "(" << finalEdge.a << "," << finalEdge.b << ")";
-            ++sizeAcc;
         }
     }
-    else std::cout << "No solutions found.\n"; 
+    else std::cout << "No solutions found."; 
     
     delete[] _disjSet;
     delete edge_set;            
@@ -110,7 +109,7 @@ void MST::performUnion(int a, int b)
         _disjSet[first].parent = second;        
     else if(_disjSet[first].rank == _disjSet[second].rank)
     {
- 			_disjSet[second].parent = first;
+ 		_disjSet[second].parent = first;
         ++_disjSet[first].rank;    
     }    
     else _disjSet[second].parent = first;       
@@ -120,27 +119,25 @@ void MST::Prim()
 {
     sizeAcc = 0;
     Edge set[_size], myEdge, myEdge2, myEdge3, finalEdge;
-    int VTarray[_size], VTsize, dummy, i;
-   
+    int VTarray[_size], VTsize, i;
+    LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
     VTarray[0] = 1;
-	 VTsize = 1;
+	VTsize = 1;
     
     for(i = 0; i < _size; ++i)
         VTarray[i] = 0;
-    
-    LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
-        
+
     for(i = 0; i < _size; ++i)
-        if(_array[1][i] != 0)
+        if(_array[0][i] != 0)
         {
-            myEdge.a = 1;
+            myEdge.a = 0;
             myEdge.b = i;
-            myEdge.copy = _array[1][i];
+            myEdge.copy = _array[0][i];
             
-            if(i < 1 && _array[i][1] == myEdge.copy) 
+            if(i < 0 && _array[i][0] == myEdge.copy) 
             {
                 myEdge.a = i;
-                myEdge.b = 1;
+                myEdge.b = 0;
             }
             
             if(VTarray[myEdge.a] == 0 || VTarray[myEdge.b] == 0) 
@@ -153,46 +150,44 @@ void MST::Prim()
         edge_set->deleteMin();
       
         if(VTarray[myEdge2.a] != 1 || VTarray[myEdge2.b] != 1)
-    	  {
+    	{
 	        set[sizeAcc] = myEdge2;
 	        ++sizeAcc;
 	        
 	        VTarray[myEdge2.a] = 1;
 	        VTarray[myEdge2.b] = 1;
 	        ++VTsize;
-	        
-	        dummy = myEdge2.b;
-	        
-	        for(int j = 0; j < _size; ++j)
-	            if(_array[dummy][j] != 0)
+
+	        for(i = 0; i < _size; ++i)
+	            if(_array[myEdge2.b][i] != 0)
 	            {
-	                myEdge3.a = dummy;
-	                myEdge3.b = j;
-	                myEdge3.copy = _array[dummy][j];
+	                myEdge3.a = myEdge2.b;
+	                myEdge3.b = i;
+	                myEdge3.copy = _array[myEdge2.b][i];
 	                
-	                if(j < dummy && _array[j][dummy] == myEdge3.copy)
+	                if(i < myEdge2.b && _array[i][myEdge2.b] == myEdge3.copy)
 	                {
-	                    myEdge3.a = j;
-	                    myEdge3.b = dummy;
+	                    myEdge3.a = i;
+	                    myEdge3.b = myEdge2.b;
 	                }
 	                
 	                if(VTarray[myEdge3.a] == 0 || VTarray[myEdge3.b] == 0)
 	                   edge_set->insert(myEdge3);	                
-	           }
-	      }
+	            }
+	    }
     }
     
-	 if(sizeAcc == _size - 1)
+	if(sizeAcc == _size - 1)
     {
         sizeAcc = 0;
         while(sizeAcc < _size - 1)
         {
             finalEdge = set[sizeAcc];
+			++sizeAcc;
             std::cout << "(" << finalEdge.a << "," << finalEdge.b << ")";
-            ++sizeAcc;
         }
     }
-    else std::cout << "No solutions found.\n"; 
+    else std::cout << "No solutions found."; 
     
     delete edge_set;
     edge_set = nullptr;        

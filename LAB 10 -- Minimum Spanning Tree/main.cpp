@@ -49,6 +49,8 @@ int main()
         cout << endl << endl;
     }
     
+	delete[] myMST;
+	
     myFile.close();
     return 0;    
 }
