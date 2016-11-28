@@ -29,7 +29,7 @@ MST::~MST()
 
 void MST::memdelete()
 {
-	for(int a = _size; a > 0; --a)
+    for(int a = _size; a > 0; --a)
         delete[] _array;
     delete[] _array;
 }
@@ -65,7 +65,7 @@ void MST::Kruskal()
         
         if(findCycle(tempEdge))
         {
-        	performUnion(findEdge(tempEdge.a), findEdge(tempEdge.b));
+            performUnion(findEdge(tempEdge.a), findEdge(tempEdge.b));
             set[sizeAcc] = tempEdge;
             ++sizeAcc;
         }
@@ -77,7 +77,7 @@ void MST::Kruskal()
         while(sizeAcc < _size - 1)
         {
             Edge finalEdge = set[sizeAcc];
-			++sizeAcc;
+	    ++sizeAcc;
             std::cout << "(" << finalEdge.a << "," << finalEdge.b << ")";
         }
     }
@@ -109,7 +109,7 @@ void MST::performUnion(int a, int b)
         _disjSet[first].parent = second;        
     else if(_disjSet[first].rank == _disjSet[second].rank)
     {
- 		_disjSet[second].parent = first;
+ 	_disjSet[second].parent = first;
         ++_disjSet[first].rank;    
     }    
     else _disjSet[second].parent = first;       
@@ -122,7 +122,7 @@ void MST::Prim()
     int VTarray[_size], VTsize, i;
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
     VTarray[0] = 1;
-	VTsize = 1;
+    VTsize = 1;
     
     for(i = 0; i < _size; ++i)
         VTarray[i] = 0;
@@ -177,13 +177,13 @@ void MST::Prim()
 	    }
     }
     
-	if(sizeAcc == _size - 1)
+    if(sizeAcc == _size - 1)
     {
         sizeAcc = 0;
         while(sizeAcc < _size - 1)
         {
             finalEdge = set[sizeAcc];
-			++sizeAcc;
+	    ++sizeAcc;
             std::cout << "(" << finalEdge.a << "," << finalEdge.b << ")";
         }
     }
