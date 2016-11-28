@@ -20,12 +20,13 @@ class LeftistHeap
     ~LeftistHeap();
     void insert(T x);
     void deleteMin();
-
+    Node<T>* m_root; 
+    
     private:
     void deleteHelper(Node<T>* n);
     Node<T>* merge(Node<T>* leftHeap, Node<T>* rightHeap);
-    Node<T>* m_root;      
 
 };
 
+#include "LeftistHeap.hpp"
 #endif

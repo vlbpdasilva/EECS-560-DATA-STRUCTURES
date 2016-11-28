@@ -16,13 +16,13 @@ Node<T>::Node()
 }
 
 template <typename T>
-void Node<T>::setValue(int i)
+void Node<T>::setValue(T i)
 {
     this->m_value = i;
 }
 
 template <typename T>
-int Node<T>::getValue()
+T Node<T>::getValue()
 {
     return this->m_value;
 }

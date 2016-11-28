@@ -13,9 +13,9 @@ using namespace std;
 
 int main()
 {  
-    int numGraphs, size, copy;
+    int numGraphs, size, copy, graphSizes[numGraphs], i;
 
-    std::ifstream myFile("data.txt");        	
+    ifstream myFile("data.txt");        	
     if(!myFile.is_open())
     {
         cout << "\nERROR:\nFile 'data.txt' was not found, please try again. \n\n\n";
@@ -23,10 +23,9 @@ int main()
     }
 	
     myFile >> numGraphs;      
-    int graphSizes[numGraphs];	
     MST** myMST = new MST*[numGraphs];
 
-    for(int i = 0; i < numGraphs; i++)
+    for(i = 0; i < numGraphs; ++i)
     {
         myFile >> size;
         myMST[i] = new MST(size);
@@ -38,8 +37,17 @@ int main()
                 myMST[i]->build(a,b,copy);
             }
     }
-
-    
+	
+	 cout << endl;        
+        
+    for(i = 0; i < numGraphs; ++i)
+    {
+        cout << "Graph " << i+1 << ": \nKruskal: ";
+        myMST[i]->Kruskal();
+        cout << "\nPrim:    "; 
+        myMST[i]->Prim();
+        cout << endl << endl;
+    }
     
     myFile.close();
     return 0;    

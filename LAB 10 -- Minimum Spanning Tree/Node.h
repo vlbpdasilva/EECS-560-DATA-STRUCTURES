@@ -15,8 +15,8 @@ class Node
 {
 	public:
         Node();
-        void setValue(int i);
-        int getValue();
+        void setValue(T i);
+        T getValue();
         void setLeft(Node<T>* left);
         Node<T>* getLeft();
         void setRight(Node<T>* right);
@@ -24,13 +24,12 @@ class Node
         void setRank(int r);
         int getRank();
 
-
 	private:
-        int m_value;
+        T m_value;
         Node<T>* m_left;
         Node<T>* m_right;        
         int m_rank; // FOR LEFTIST HEAP
-
 };
 
+#include "Node.hpp"
 #endif
