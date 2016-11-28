@@ -13,7 +13,7 @@ using namespace std;
 
 int main()
 {  
-    int numGraphs, size, copy, graphSizes[numGraphs], i;
+    int numGraphs, size, copy, i;
 
     ifstream myFile("data.txt");        	
     if(!myFile.is_open())
@@ -38,7 +38,7 @@ int main()
             }
     }
 	
-	 cout << endl;        
+    cout << endl;        
         
     for(i = 0; i < numGraphs; ++i)
     {
@@ -49,7 +49,7 @@ int main()
         cout << endl << endl;
     }
     
-	delete[] myMST;
+    delete[] myMST;
 	
     myFile.close();
     return 0;    
