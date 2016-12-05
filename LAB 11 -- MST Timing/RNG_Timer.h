@@ -16,6 +16,7 @@ class RNG_Timer
         void graphBuilder(int a, MST* myMST);
         double value, KruskalTime, PrimTime;
         int randCounter;
+		  MST* myMST;
 };
 
 #include "RNG_Timer.hpp"

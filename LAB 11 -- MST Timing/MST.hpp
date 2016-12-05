@@ -9,6 +9,8 @@
 #include "LeftistHeap.h"
 #include "AdjList.h"
 
+#include <iostream>
+
 MST::MST(int size)
 {
    _size = size;
@@ -19,11 +21,6 @@ MST::MST(int size)
 }
 
 MST::~MST()
-{
-    memdelete();
-}
-
-void MST::memdelete()
 {
 }
 
@@ -119,7 +116,7 @@ int MST::Prim()
     sizeAcc = 0;
 	 currCost = 0;
     Edge set[_size], myEdge, myEdge2, myEdge3, finalEdge;
-    int VTarray[_size], VTsize, i;
+    int VTarray[_size], VTsize, i, edgeVal;
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
     VTarray[0] = 1;
 	 VTsize = 1;
@@ -127,16 +124,16 @@ int MST::Prim()
     for(i = 0; i < _size; ++i)
         VTarray[i] = 0;
 
-    for(AdjList* i = _adjList[0]; i; i = i->_next)
-        if(i->_node.copy != 0)
+    for(AdjList* k = _adjList[0]; k; k = k->_next)
+        if(k->_node.copy != 0)
         {
             myEdge.a = 0;
-            myEdge.b = i->_node.b;
-            myEdge.copy = i->_node.copy;
+            myEdge.b = k->_node.b;
+            myEdge.copy = k->_node.copy;
             
-            if(i->_node.b < 0)
+            if(k->_node.b < 0)
             {
-                myEdge.a = i->_node.b;
+                myEdge.a = k->_node.b;
                 myEdge.b = 0;
             }
             
@@ -153,22 +150,32 @@ int MST::Prim()
     	  {
 	        set[sizeAcc] = myEdge2;
 	        ++sizeAcc;
-	        currCost += myEdge2.copy;
-	        VTarray[myEdge2.a] = 1;
-	        VTarray[myEdge2.b] = 1;
 	        ++VTsize;
-
+			  currCost += myEdge2.copy;
+			  
+			  if(VTarray[myEdge2.a] == 0)
+			  {
+			  		VTarray[myEdge2.a] == 1;
+			  		edgeVal = myEdge2.a;
+			  }
+			  
+			  if(VTarray[myEdge2.b] == 0)
+			  {
+			  		VTarray[myEdge2.b] == 1;
+			  		edgeVal = myEdge2.b;
+			  }
+			  
 	        for(AdjList* i = _adjList[0]; i; i=i->_next)
 	            if(i->_node.copy != 0)
 	            {
-	                myEdge3.a = 0;
+	                myEdge3.a = edgeVal;
 	                myEdge3.b = i->_node.b;
 	                myEdge3.copy = i->_node.copy;
 	                
-	                if(i->_node.b > 0)
+	                if(i->_node.b > edgeVal)
 	                {
 	                    myEdge3.a = i->_node.b;
-	                    myEdge3.b = 0;
+	                    myEdge3.b = edgeVal;
 	                }
 	                
 	                if(VTarray[myEdge3.a] == 0 || VTarray[myEdge3.b] == 0)
@@ -178,7 +185,7 @@ int MST::Prim()
     }
     
     delete edge_set;
-    edge_set = nullptr;       
-    
+    edge_set = nullptr;
+              
     return currCost;
 }

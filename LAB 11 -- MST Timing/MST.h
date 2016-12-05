@@ -32,7 +32,6 @@ class MST
     bool findCycle (Edge& _edge);
     int findEdge (int _edge_value);
     void performUnion(int a, int b);
-    void memdelete();
 };
 
 #include "MST.hpp"
