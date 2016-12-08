@@ -20,7 +20,7 @@ MST::MST(int size)
 
 MST::~MST()
 {
-	memdelete();
+    memdelete();
 }
 
 void MST::memdelete()
@@ -38,7 +38,7 @@ void MST::resetGraph()
 
 void MST::costUpdate(int _cost = 0)
 {
-	currCost += _cost;
+    currCost += _cost;
 }
 
 void MST::build(int a, int b, int c)
