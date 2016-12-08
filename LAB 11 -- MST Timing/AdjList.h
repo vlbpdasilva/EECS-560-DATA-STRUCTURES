@@ -16,7 +16,7 @@ class AdjList
    	 AdjList();
    	 ~AdjList();
    	 AdjListNode _node;
-  	 AdjList* _next;
+  	 	 AdjList* _next;
 };
 
 #endif

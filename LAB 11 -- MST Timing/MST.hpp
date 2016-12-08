@@ -20,6 +20,11 @@ MST::MST(int size)
 
 MST::~MST()
 {
+	memdelete();
+}
+
+void MST::memdelete()
+{
     for(int a = 0; a < _size; ++a) 
         delete _adjList[a];
     delete [] _adjList;
@@ -29,6 +34,11 @@ void MST::resetGraph()
 {
     sizeAcc = 0;
     currCost = 0;
+}
+
+void MST::costUpdate(int _cost = 0)
+{
+	currCost += _cost;
 }
 
 void MST::build(int a, int b, int c)
@@ -67,8 +77,8 @@ int MST::Kruskal()
         if(!findCycle(tempEdge)) 	
         {
             set[sizeAcc] = tempEdge;
-            ++sizeAcc;
-            currCost += tempEdge.copy;        
+            ++sizeAcc; 
+			costUpdate(tempEdge.copy);		  
         }
     }
 
@@ -116,7 +126,7 @@ int MST::Prim()
 {
     resetGraph();
     Edge set[_size], myEdge, myEdge2, myEdge3, finalEdge;
-    int VTarray[_size], VTsize, i, edgeVal;
+    int VTarray[_size], VTsize = 1, i, edgeVal;
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
     
     for(i = 0; i < _size; ++i) 
@@ -140,8 +150,7 @@ int MST::Prim()
             if(VTarray[myEdge.a] == 0 || VTarray[myEdge.b] == 0) 
                 edge_set->insert(myEdge);
         }
-      
-    VTsize = 1;
+
     while(edge_set->m_root && VTsize != _size)
     {
         myEdge2 = edge_set->m_root->getValue();
@@ -151,7 +160,7 @@ int MST::Prim()
         {            
             set[sizeAcc] = myEdge2;
             ++sizeAcc;
-            currCost += myEdge2.copy;
+		    costUpdate(myEdge2.copy);
 			  
             if(VTarray[myEdge2.a] == 0)
             {

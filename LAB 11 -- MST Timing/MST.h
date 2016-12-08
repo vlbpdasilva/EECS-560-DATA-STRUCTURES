@@ -29,7 +29,7 @@ class MST
   	Element* _disjSet;
     	AdjList** _adjList;
     	bool findCycle (Edge& _edge);
-    	void performUnion(int a, int b), resetGraph();
+    	void performUnion(int a, int b), resetGraph(), memdelete(), costUpdate(int _cost);
 };
 
 #include "MST.hpp"

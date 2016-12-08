@@ -12,8 +12,7 @@ class RNG_Timer
         ~RNG_Timer();
 
 	private:
-        void graphTimer(int a);
-        void graphBuilder(int a, MST* myMST);
+        void graphTimer(int a), graphBuilder(int a, MST* myMST);
         double value, KruskalTime, PrimTime;
         int randCounter;
 };
