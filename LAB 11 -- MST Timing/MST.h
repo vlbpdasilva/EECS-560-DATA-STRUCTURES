@@ -22,10 +22,10 @@ class MST
         MST(int size);
    	~MST();
     	void build(int a, int b, int c);
-    	int Kruskal(), Prim();
+    	int Kruskal(), Prim(), currCost;
         
     private:
-   	int _size, sizeAcc, currCost, findEdge(int _edge_value);
+   	int _size, sizeAcc, findEdge(int _edge_value);
   	Element* _disjSet;
     	AdjList** _adjList;
     	bool findCycle (Edge& _edge);

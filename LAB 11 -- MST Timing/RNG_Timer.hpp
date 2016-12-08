@@ -34,8 +34,9 @@ void RNG_Timer::graphBuilder(int a, MST* myMST)
             if(n == k) continue;
             value = ((double)rand() / (RAND_MAX));
             if(value < 0.5) edgeCost = 0;
-            else edgeCost = rand() & (4 * a) + 1;				
+            else edgeCost = rand() % (4 * a) + 1;				
             myMST->build(k,n,edgeCost);		
+            myMST->build(n,k,edgeCost);
         }
 }
 
@@ -50,14 +51,14 @@ void RNG_Timer::graphTimer(int a)
     {
         ++randCounter;		
             
-        cout << "\n### For n = " << a << ":, seed #" << i+1 <<":\n";
+        cout << "\n### For n = " << a << ", seed #" << i+1 <<":\n";
         graphBuilder(a, myMST);
 		
         myTimer.start();
         cout << "Cost " << myMST->Kruskal() <<" for Kruskal's algorithm, time: ";
         KruskalTime += myTimer.stop();
         myTimer.printTime(myTimer.stop());
-		
+                    
         myTimer.start();
         cout << "Cost " << myMST->Prim() <<" for Prim's algorithm, time: ";
         PrimTime += myTimer.stop();

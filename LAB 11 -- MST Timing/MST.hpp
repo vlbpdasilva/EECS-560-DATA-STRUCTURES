@@ -147,8 +147,8 @@ int MST::Prim()
         myEdge2 = edge_set->m_root->getValue();
         edge_set->deleteMin();
       
-        if(VTarray[myEdge2.a] != 1 || VTarray[myEdge2.b] != 1)
-        {
+        if(VTarray[myEdge2.a] != 1 || VTarray[myEdge2.b] != 1)          
+        {            
             set[sizeAcc] = myEdge2;
             ++sizeAcc;
             currCost += myEdge2.copy;

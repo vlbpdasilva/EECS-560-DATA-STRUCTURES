@@ -1,0 +1,92 @@
+
+### For n = 500, seed #1:
+Cost 5052 for Kruskal's algorithm, time: 0.029855 seconds
+Cost 5052 for Prim's algorithm, time: 0.032935 seconds
+
+### For n = 500, seed #2:
+Cost 5156 for Kruskal's algorithm, time: 0.031391 seconds
+Cost 5156 for Prim's algorithm, time: 0.032893 seconds
+
+### For n = 500, seed #3:
+Cost 4976 for Kruskal's algorithm, time: 0.032869 seconds
+Cost 4976 for Prim's algorithm, time: 0.032568 seconds
+
+### For n = 500, seed #4:
+Cost 4901 for Kruskal's algorithm, time: 0.031800 seconds
+Cost 4901 for Prim's algorithm, time: 0.031013 seconds
+
+### For n = 500, seed #5:
+Cost 5065 for Kruskal's algorithm, time: 0.033512 seconds
+Cost 5065 for Prim's algorithm, time: 0.031663 seconds
+
+->Kruskal's algorithm average time for 500 values: 0.0318854
+->Prim's algorithm average time for 500 values: 0.0322144
+
+### For n = 1000, seed #1:
+Cost 9202 for Kruskal's algorithm, time: 0.123583 seconds
+Cost 9202 for Prim's algorithm, time: 0.146142 seconds
+
+### For n = 1000, seed #2:
+Cost 10504 for Kruskal's algorithm, time: 0.124757 seconds
+Cost 10504 for Prim's algorithm, time: 0.133967 seconds
+
+### For n = 1000, seed #3:
+Cost 10262 for Kruskal's algorithm, time: 0.118330 seconds
+Cost 10262 for Prim's algorithm, time: 0.139788 seconds
+
+### For n = 1000, seed #4:
+Cost 10389 for Kruskal's algorithm, time: 0.123731 seconds
+Cost 10389 for Prim's algorithm, time: 0.130966 seconds
+
+### For n = 1000, seed #5:
+Cost 9902 for Kruskal's algorithm, time: 0.119755 seconds
+Cost 9902 for Prim's algorithm, time: 0.129199 seconds
+
+->Kruskal's algorithm average time for 1000 values: 0.122031
+->Prim's algorithm average time for 1000 values: 0.136012
+
+### For n = 2000, seed #1:
+Cost 20378 for Kruskal's algorithm, time: 0.520144 seconds
+Cost 20378 for Prim's algorithm, time: 0.558295 seconds
+
+### For n = 2000, seed #2:
+Cost 20854 for Kruskal's algorithm, time: 0.513171 seconds
+Cost 20854 for Prim's algorithm, time: 0.610222 seconds
+
+### For n = 2000, seed #3:
+Cost 19838 for Kruskal's algorithm, time: 0.501283 seconds
+Cost 19838 for Prim's algorithm, time: 0.558797 seconds
+
+### For n = 2000, seed #4:
+Cost 20028 for Kruskal's algorithm, time: 0.501618 seconds
+Cost 20028 for Prim's algorithm, time: 0.597544 seconds
+
+### For n = 2000, seed #5:
+Cost 19465 for Kruskal's algorithm, time: 0.528260 seconds
+Cost 19465 for Prim's algorithm, time: 0.592267 seconds
+
+->Kruskal's algorithm average time for 2000 values: 0.512895
+->Prim's algorithm average time for 2000 values: 0.583425
+
+### For n = 4000, seed #1:
+Cost 40635 for Kruskal's algorithm, time: 2.246132 seconds
+Cost 40635 for Prim's algorithm, time: 2.588572 seconds
+
+### For n = 4000, seed #2:
+Cost 39949 for Kruskal's algorithm, time: 2.281941 seconds
+Cost 39949 for Prim's algorithm, time: 2.521476 seconds
+
+### For n = 4000, seed #3:
+Cost 40049 for Kruskal's algorithm, time: 2.133468 seconds
+Cost 40049 for Prim's algorithm, time: 2.524852 seconds
+
+### For n = 4000, seed #4:
+Cost 40683 for Kruskal's algorithm, time: 2.112112 seconds
+Cost 40683 for Prim's algorithm, time: 2.524691 seconds
+
+### For n = 4000, seed #5:
+Cost 39695 for Kruskal's algorithm, time: 2.100956 seconds
+Cost 39695 for Prim's algorithm, time: 2.511707 seconds
+
+->Kruskal's algorithm average time for 4000 values: 2.17492
+->Prim's algorithm average time for 4000 values: 2.53426
