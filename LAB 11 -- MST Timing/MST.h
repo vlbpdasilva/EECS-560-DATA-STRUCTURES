@@ -19,17 +19,17 @@ bool operator < (const Edge& rhs) const { return copy < rhs.copy; }};
 class MST
 {    
     public:
-   	 MST(int size);
-   	 ~MST();
-    	 void build(int a, int b, int copy);
-    	 int Kruskal(), Prim();
+        MST(int size);
+   	~MST();
+    	void build(int a, int b, int c);
+    	int Kruskal(), Prim();
         
     private:
-   	 int _size, sizeAcc, currCost, findEdge(int _edge_value);
-  	    Element* _disjSet;
-    	 AdjList** _adjList;
-    	 bool findCycle (Edge& _edge);
-    	 void performUnion(int a, int b), resetGraph();
+   	int _size, sizeAcc, currCost, findEdge(int _edge_value);
+  	Element* _disjSet;
+    	AdjList** _adjList;
+    	bool findCycle (Edge& _edge);
+    	void performUnion(int a, int b), resetGraph();
 };
 
 #include "MST.hpp"
