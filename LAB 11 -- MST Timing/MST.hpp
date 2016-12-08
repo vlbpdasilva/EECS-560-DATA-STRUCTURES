@@ -78,7 +78,7 @@ int MST::Kruskal()
         {
             set[sizeAcc] = tempEdge;
             ++sizeAcc; 
-			costUpdate(tempEdge.copy);		  
+	    costUpdate(tempEdge.copy);		  
         }
     }
 
@@ -160,7 +160,7 @@ int MST::Prim()
         {            
             set[sizeAcc] = myEdge2;
             ++sizeAcc;
-		    costUpdate(myEdge2.copy);
+	    costUpdate(myEdge2.copy);
 			  
             if(VTarray[myEdge2.a] == 0)
             {
