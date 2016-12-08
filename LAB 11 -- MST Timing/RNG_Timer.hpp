@@ -33,19 +33,15 @@ void RNG_Timer::graphBuilder(int a, MST* myMST)
         {
             if(n == k) continue;
             value = ((double)rand() / (RAND_MAX));
-            if(value > 1 || value < 0) continue;
-            if(value < 0.5)
-                edgeCost = 0;
-            else
-                edgeCost = rand() & (4 * a) + 1;
-				
+            if(value < 0.5) edgeCost = 0;
+            else edgeCost = rand() & (4 * a) + 1;				
             myMST->build(k,n,edgeCost);		
         }
 }
 
 void RNG_Timer::graphTimer(int a)
 {
-    myMST = new MST(a);
+    MST* myMST = new MST(a);
     KruskalTime = 0;
     PrimTime = 0;
     Timer myTimer;	

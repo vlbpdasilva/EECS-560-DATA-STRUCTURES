@@ -81,10 +81,12 @@ int MST::Kruskal()
 
 bool MST::findCycle(Edge& _edge)
 {
-    if(findEdge(_edge.a) != findEdge(_edge.b)) 
-   	return 0;
-    performUnion(findEdge(_edge.a), findEdge(_edge.b));
-    return 1;
+    int first = findEdge(_edge.a);
+    int second = findEdge(_edge.b);
+    
+    if(first == second) return 1;
+    performUnion(first,second);
+    return 0;
 }
 
 int MST::findEdge(int _edge_value)
@@ -101,13 +103,13 @@ void MST::performUnion(int a, int b)
     int second = findEdge(b);
     
     if(_disjSet[first].rank < _disjSet[second].rank)  
+        _disjSet[first].parent = second;           
+    else if(_disjSet[first].rank == _disjSet[second].rank)
     {
-        _disjSet[first].parent = second;  
-        return;     
-    }        
-    if(_disjSet[first].rank == _disjSet[second].rank)
         ++_disjSet[first].rank;    
-    _disjSet[second].parent = first;       
+        _disjSet[second].parent = first;       
+    }      
+    else _disjSet[second].parent = first;
 }
 
 int MST::Prim()
@@ -116,11 +118,11 @@ int MST::Prim()
     Edge set[_size], myEdge, myEdge2, myEdge3, finalEdge;
     int VTarray[_size], VTsize, i, edgeVal;
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
-    VTarray[0] = 1;
-    VTsize = 1;
     
     for(i = 0; i < _size; ++i) 
         VTarray[i] = 0;
+    
+    VTarray[0] = 1;
 
     for(AdjList* k = _adjList[0]; k; k = k->_next)
         if(k->_node.copy != 0)
@@ -139,6 +141,7 @@ int MST::Prim()
                 edge_set->insert(myEdge);
         }
       
+    VTsize = 1;
     while(edge_set->m_root && VTsize != _size)
     {
         myEdge2 = edge_set->m_root->getValue();
