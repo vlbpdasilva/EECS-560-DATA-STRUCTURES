@@ -10,11 +10,11 @@ using namespace std;
 
 RNG_Timer::RNG_Timer()
 {
-	int j = 500;
-	while(j<=4000)
+	int dummy = 500;
+	while(dummy <= 4000)
 	{
-		graphTimer(j);
-		j *= 2;
+		graphTimer(dummy);
+		dummy *= 2;
 	}
 	
 	randCounter = 1;

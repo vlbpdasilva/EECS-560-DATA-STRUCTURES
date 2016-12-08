@@ -13,15 +13,24 @@
 
 MST::MST(int size)
 {
+	resetGraph();   
    _size = size;
-   sizeAcc = 0;
-   currCost = 0;
 	_adjList = new AdjList*[_size];
-	for(int a = 0; a < _size; ++a) _adjList[a] = nullptr;
+	for(int a = 0; a < _size; ++a) 
+		_adjList[a] = nullptr;
 }
 
 MST::~MST()
 {
+	for(int a = 0; a < _size; ++a) 
+		delete _adjList[a];
+	delete [] _adjList;
+}
+
+void MST::resetGraph()
+{
+	sizeAcc = 0;
+	currCost = 0;
 }
 
 void MST::build(int a, int b, int copy)
@@ -35,8 +44,7 @@ void MST::build(int a, int b, int copy)
 
 int MST::Kruskal()
 {
-    sizeAcc = 0;
-    currCost = 0;
+	 resetGraph();
     Edge set[_size], myEdge, tempEdge;
     _disjSet = new Element[_size];    
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
@@ -58,25 +66,14 @@ int MST::Kruskal()
         tempEdge = edge_set->m_root->getValue();
         edge_set->deleteMin();
         
-        if(findCycle(tempEdge))
+        if(!findCycle(tempEdge)) 	
         {
-        		performUnion(findEdge(tempEdge.a), findEdge(tempEdge.b));
-            set[sizeAcc] = tempEdge;
-            ++sizeAcc;
-            currCost += tempEdge.copy;
-        }
-    }
-    
-    if(sizeAcc == _size - 1)
-    {
-        sizeAcc = 0;
-        while(sizeAcc < _size - 1)
-        {
-            Edge finalEdge = set[sizeAcc];
+				set[sizeAcc] = tempEdge;
 				++sizeAcc;
+				currCost += tempEdge.copy;        
         }
     }
-    
+
     delete[] _disjSet;
     delete edge_set;            
     edge_set = nullptr;    	
@@ -86,12 +83,16 @@ int MST::Kruskal()
 
 bool MST::findCycle(Edge& _edge)
 {
-    return findEdge(_edge.a) != findEdge(_edge.b);
+   if(findEdge(_edge.a) != findEdge(_edge.b)) 
+   	return 0;
+   performUnion(findEdge(_edge.a), findEdge(_edge.b));
+   return 1;
 }
 
 int MST::findEdge(int _edge_value)
 {    
-    if(_disjSet[_edge_value].parent == -1) return _edge_value;    
+    if(_disjSet[_edge_value].parent == -1) 
+    	 return _edge_value;    
     _disjSet[_edge_value].parent = findEdge(_disjSet[_edge_value].parent);
     return _disjSet[_edge_value].parent;  
 }
@@ -102,27 +103,26 @@ void MST::performUnion(int a, int b)
     int second = findEdge(b);
     
     if(_disjSet[first].rank < _disjSet[second].rank)  
-        _disjSet[first].parent = second;        
-    else if(_disjSet[first].rank == _disjSet[second].rank)
     {
- 		_disjSet[second].parent = first;
+        _disjSet[first].parent = second;  
+    	  return;     
+    }        
+    if(_disjSet[first].rank == _disjSet[second].rank)
         ++_disjSet[first].rank;    
-    }    
-    else _disjSet[second].parent = first;       
+	 _disjSet[second].parent = first;       
 }
 
 int MST::Prim()
 {
-    sizeAcc = 0;
-	 currCost = 0;
+    resetGraph();
     Edge set[_size], myEdge, myEdge2, myEdge3, finalEdge;
     int VTarray[_size], VTsize, i, edgeVal;
     LeftistHeap<Edge>* edge_set = new LeftistHeap<Edge>();
     VTarray[0] = 1;
 	 VTsize = 1;
     
-    for(i = 0; i < _size; ++i)
-        VTarray[i] = 0;
+    for(i = 0; i < _size; ++i) 
+    	  VTarray[i] = 0;
 
     for(AdjList* k = _adjList[0]; k; k = k->_next)
         if(k->_node.copy != 0)
@@ -155,13 +155,13 @@ int MST::Prim()
 			  
 			  if(VTarray[myEdge2.a] == 0)
 			  {
-			  		VTarray[myEdge2.a] == 1;
+			  		VTarray[myEdge2.a] = 1;
 			  		edgeVal = myEdge2.a;
 			  }
 			  
 			  if(VTarray[myEdge2.b] == 0)
 			  {
-			  		VTarray[myEdge2.b] == 1;
+			  		VTarray[myEdge2.b] = 1;
 			  		edgeVal = myEdge2.b;
 			  }
 			  
@@ -172,7 +172,7 @@ int MST::Prim()
 	                myEdge3.b = i->_node.b;
 	                myEdge3.copy = i->_node.copy;
 	                
-	                if(i->_node.b > edgeVal)
+	                if(i->_node.b < edgeVal)
 	                {
 	                    myEdge3.a = i->_node.b;
 	                    myEdge3.b = edgeVal;
