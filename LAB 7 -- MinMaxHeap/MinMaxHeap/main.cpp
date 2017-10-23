@@ -1,7 +1,7 @@
 /**
 *	@file : main.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
+*	@date : Oct 30 2016
 */
 
 #include "MinMaxHeap.h"
@@ -9,7 +9,7 @@
 #include <fstream>
 
 /*
-*	Helper method, prints menu. 
+*	Helper method, prints menu.
 */
 void print()
 {
@@ -22,62 +22,62 @@ void print()
  * Inserts values from data.txt
  */
 int main()
-{  
+{
 	int selection, insertValue, size, number, counter;
 
-	std::ifstream myFile;	
+	std::ifstream myFile;
 	myFile.open("data.txt");
-    	while(myFile >> number)    
+    	while(myFile >> number)
             size++;
 
 	int values[size];
-		
+
 	myFile.clear();
-    	myFile.seekg(0, myFile.beg);	
-		
-    	while (myFile >> number) 
+    	myFile.seekg(0, myFile.beg);
+
+    	while (myFile >> number)
 	{
             values[counter] = number;
             counter++;
     	}
-	
-	myFile.close();	
-		
+
+	myFile.close();
+
 	MinMaxHeap* myMinMaxHeap = new MinMaxHeap();
         myMinMaxHeap->build(values, size);
 
 	do
 	{
             print();
-            std::cin >> selection;	
-			
+            std::cin >> selection;
+
             switch(selection)
             {
-                case 1:		
+                case 1:
                     std::cout << "Enter value to insert: ";
                     std::cin >> insertValue;
                     myMinMaxHeap->insert(insertValue);
-                    break;                        
-                case 2:                          
+                    break;
+                case 2:
                     myMinMaxHeap->deleteMin();
-                    break;                        
-                case 3:                          
+                    break;
+                case 3:
                     myMinMaxHeap->deleteMax();
-                    break;                    
-                case 4:  
+                    break;
+                case 4:
                     std::cout << "Level order:";
                     myMinMaxHeap->levelOrder();
-                    break;                
-                case 5:  
+                    break;
+                case 5:
                     std::cout<< "Program exit\n";
-                    break;	
-                default: 
+                    break;
+                default:
                     std::cout << "Invalid input, try again\n";
                     break;
-            }       
-		
+            }
+
 	}
-	while(selection!=5);	
+	while(selection!=5);
         delete myMinMaxHeap;
-	return 0;    
+	return 0;
 }

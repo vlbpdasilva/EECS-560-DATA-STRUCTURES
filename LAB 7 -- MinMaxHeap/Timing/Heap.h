@@ -1,8 +1,8 @@
 /**
-*	@file :	
+*	@file :	Heap.h
 *	@author :  Victor Berger da Silva
-*	@date :	
-* 
+*	@date :	Oct 30 2016
+*
 */
 
 
@@ -14,7 +14,7 @@ class Heap
 {
 	public:
         Heap();
-        ~Heap();        
+        ~Heap();
         void builder();
         void heapify(int x);
         int  search(int x);
