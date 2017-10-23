@@ -1,8 +1,8 @@
 /**
 *	@file : main.cpp
 *	@author :  Victor Luiz Berger da Silva
-*	@date : 
- 
+*	@date : Oct 02 2016
+
 */
 
 #include "Heap.h"
@@ -32,20 +32,20 @@ int main(int argc, char** argv)
     int elements;
 	int toInsert;
 	int toDelete;
-    
+
     ifstream myFile;
     myFile.open("data.txt");
-    
+
     while(myFile >> number)
         elements++;
 
     int array[elements];
-    
+
     myFile.clear();
     myFile.seekg(0, ios::beg);
-    
+
     Heap* myHeap = new Heap();
-    
+
     for(int i = 0; i < elements; i++)
     {
         myFile >> number;
@@ -53,18 +53,18 @@ int main(int argc, char** argv)
     }
 
     myHeap->builder(array,elements);
-    
+
     do
     {
         print();
         cin >> selection;
-        
+
         switch(selection)
         {
             case 1:
 				cout << "Please insert the number that you want to be inserted in the heap:\n";
 				cin >> toInsert;
-                myHeap->insert(toInsert);     
+                myHeap->insert(toInsert);
                 break;
 			case 2:
 				myHeap->deleteMin();
@@ -89,9 +89,9 @@ int main(int argc, char** argv)
         }
     }
     while(selection != 6);
-	
+
 	myFile.close();
 	delete myHeap;
-        
+
     return 0;
 }
