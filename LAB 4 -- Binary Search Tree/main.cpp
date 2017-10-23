@@ -1,8 +1,8 @@
 /**
 *	@file : main.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
- 
+*	@date : Oct 02 2016
+
 */
 
 #include "BST.h"
@@ -34,22 +34,22 @@ int main(int argc, char** argv)
     int toInsert;
     int toRemove;
     int toSearch;
-	
+
     BST* myBST = new BST();
-    
-    std::ifstream myFile;	
+
+    std::ifstream myFile;
     myFile.open("data.txt");
-    while(myFile >> number)    
+    while(myFile >> number)
         myBST->insert(number);
-    
+
     do
     {
         print();
         cin >> selection;
-        
+
         switch(selection)
         {
-            case 1: 
+            case 1:
                 cout << "Please insert the number that you want to be inserted in the tree:\nSelection: ";
                 cin >> toInsert;
                 myBST->insert(toInsert);
@@ -62,10 +62,10 @@ int main(int argc, char** argv)
             case 3:
                 myBST->deleteMin();
                 break;
-            case 4: 
+            case 4:
                 myBST->deleteMax();
                 break;
-            case 5: 
+            case 5:
                 myBST->preOrder();
                 break;
             case 6:
@@ -77,15 +77,15 @@ int main(int argc, char** argv)
             case 8:
                 cout << "Bye bye.\n";
                 break;
-            default: 
+            default:
                 cout <<"Invalid input, try again.\n";
                 break;
         }
     }
     while(selection != 8);
-    
+
     myFile.close();
     delete myBST;
-    
+
     return 0;
 }

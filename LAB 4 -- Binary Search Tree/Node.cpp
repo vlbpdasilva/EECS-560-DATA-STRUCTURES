@@ -1,8 +1,8 @@
 /**
 *	@file : Node.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
-* 
+*	@date : Oct 02 2016
+*
 */
 
 #include "Node.h"
