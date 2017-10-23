@@ -1,3 +1,9 @@
+/**
+*	@file : RNG_Timer.cpp
+*	@author :  Victor Berger da Silva
+*	@date : Oct 17 2016
+*/
+
 #include "RNG_Timer.h"
 #include "BST.h"
 #include "Heap.h"
@@ -29,22 +35,22 @@ RNG_Timer::~RNG_Timer()
 void RNG_Timer::insertTimer()
 {
     Heap* myHeap = new Heap();
-    BST* myBST = new BST();  
+    BST* myBST = new BST();
     Timer myTimer;
-	
-    srand(time(NULL));		
-    double totalTimeBST = 0;	
+
+    srand(time(NULL));
+    double totalTimeBST = 0;
     double totalTimeHeap = 0;
     int myNum;
-    
+
     for (int values = 0; values < 4; values++)
-    {	
+    {
         for(int seeds = 1; seeds <= 5; seeds++)
-        {	
+        {
             cout << "\n### For n = " << n_values[values] <<", seed #" << seeds << ": ";
             srand(seeds + 1);
             myTimer.start();
-            for(int counter = 1; counter <= n_values[values]; counter++) 
+            for(int counter = 1; counter <= n_values[values]; counter++)
             {
                 myNum = rand() % (4 * n_values[values]) + 1;
                 myBST->insert(myNum);
@@ -52,10 +58,10 @@ void RNG_Timer::insertTimer()
             totalTimeBST += myTimer.stop();
             cout << "\n  BST: ";
             myTimer.printTime(myTimer.stop());
-			
+
             srand(seeds + 1);
             myTimer.start();
-            for(int counter = 1; counter <= n_values[values]; counter++) 
+            for(int counter = 1; counter <= n_values[values]; counter++)
             {
                 myNum = rand() % (4 * n_values[values]) + 1;
                 myHeap->insert(myNum);
@@ -63,21 +69,21 @@ void RNG_Timer::insertTimer()
             totalTimeHeap += myTimer.stop();
             cout << "  Heap: ";
             myTimer.printTime(myTimer.stop());
-            
+
             operationTimer(n_values[values], myBST, myHeap);
-			
+
             delete myBST;
             myBST = new BST();
             delete myHeap;
             myHeap = new Heap();
         }
-		
+
         totalTimeBST = totalTimeBST / 5;
         totalTimeHeap = totalTimeHeap / 5;
         cout << "\n->BST time average between seeds for n = " << n_values[values] << ": " << totalTimeBST << " seconds\n";
         cout << "->Heap time average between seeds for n = " << n_values[values] << ": " << totalTimeHeap << " seconds\n";
 
-    }	
+    }
     delete myBST;
     delete myHeap;
 }
@@ -91,20 +97,20 @@ void RNG_Timer::operationTimer(int n, BST* myBST, Heap* myHeap)
     Timer myTimer;
 
     for(int i = 0; i < times; i++)
-    {    
+    {
         choice = (double)rand() / (RAND_MAX);
         if(choice < 0.25)
         {
-            myTimer.start();		
+            myTimer.start();
             myBST->deleteMin();
-            opTimerBST += myTimer.stop();                    
+            opTimerBST += myTimer.stop();
             myTimer.start();
             myHeap->deleteMin();
             opTimerHeap += myTimer.stop();
         }
         else if (choice < 0.5)
-        { 
-            myTimer.start();		
+        {
+            myTimer.start();
             myBST->deleteMax();
             opTimerBST += myTimer.stop();
             myTimer.start();
@@ -113,28 +119,28 @@ void RNG_Timer::operationTimer(int n, BST* myBST, Heap* myHeap)
         }
         else if(choice < 0.75)
         {
-            randomInt = rand() % (4 * n) + 1;     
-            myTimer.start();	
+            randomInt = rand() % (4 * n) + 1;
+            myTimer.start();
             myBST->remove(randomInt);
-            opTimerBST += myTimer.stop();	
+            opTimerBST += myTimer.stop();
             myTimer.start();
             myHeap->remove(randomInt);
             opTimerHeap += myTimer.stop();
         }
         else
-        { 
-            randomInt = rand() % (4 * n) + 1;   
-            myTimer.start();		
+        {
+            randomInt = rand() % (4 * n) + 1;
+            myTimer.start();
             myBST->insert(randomInt);
             opTimerBST += myTimer.stop();
             myTimer.start();
             myHeap->insert(randomInt);
         }
-    }  
-    
+    }
+
     cout << "Time for " << times << " insertion/deletion operations on BST: "<< opTimerBST << endl;
     cout << "Time for " << times << " insertion/deletion operations on Min-5-Heap: "<< opTimerHeap << endl;
-    
+
     opTimerBST = 0;
     opTimerHeap = 0;
 }
