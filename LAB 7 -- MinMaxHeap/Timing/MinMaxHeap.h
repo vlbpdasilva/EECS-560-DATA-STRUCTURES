@@ -1,8 +1,8 @@
 /**
-*	@file :	
+*	@file :	MinMaxHeap.h
 *	@author :  Victor Berger da Silva
-*	@date :	
-* 
+*	@date :	Oct 30 2016
+*
 */
 
 
@@ -11,7 +11,7 @@
 
 class MinMaxHeap
 {
-    
+
 public:
     MinMaxHeap();
     ~MinMaxHeap();
@@ -20,7 +20,7 @@ public:
     void deleteMin();
     void deleteMax();
     void insert(int a);
-        
+
 private:
     int size;
     int array[500000];

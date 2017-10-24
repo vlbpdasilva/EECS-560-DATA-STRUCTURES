@@ -1,8 +1,8 @@
 /**
 *	@file : SkewHeap.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
-* 
+*	@date : Nov 06 2016
+*
 */
 
 #include "SkewHeap.h"
@@ -24,10 +24,10 @@ SkewHeap::~SkewHeap()
 void SkewHeap::deleteHelper(Node* n)
 {
     if(!n) return;
-    
+
     deleteHelper(n->getLeft());
     deleteHelper(n->getRight());
-    delete n;    
+    delete n;
 }
 
 void SkewHeap::insert(int x)
@@ -54,14 +54,14 @@ Node* SkewHeap::merge(Node* leftHeap, Node* rightHeap)
 {
     if(!leftHeap) return rightHeap;
     if(!rightHeap) return leftHeap;
-    
+
     if(rightHeap->getValue() < leftHeap->getValue())
     {
         Node* temp = leftHeap;
         leftHeap = rightHeap;
         rightHeap = temp;
     }
-    
+
     if(!leftHeap->getLeft())
         leftHeap->setLeft(rightHeap);
     else
@@ -71,7 +71,7 @@ Node* SkewHeap::merge(Node* leftHeap, Node* rightHeap)
         leftHeap->setLeft(leftHeap->getRight());
         leftHeap->setRight(temp);
     }
-    
+
     return leftHeap;
 }
 
@@ -88,9 +88,9 @@ void SkewHeap::levelOrder()
 
 void SkewHeap::levelOrderHelper(Node* n)
 {
-    Queue* myQueue = new Queue();    
+    Queue* myQueue = new Queue();
     Node* temp = new Node();
-   
+
     if(n) myQueue->add(n);
     else return;
 
@@ -101,9 +101,9 @@ void SkewHeap::levelOrderHelper(Node* n)
         if(temp->getLeft())
             myQueue->add(temp->getLeft());
         if(temp->getRight())
-            myQueue->add(temp->getRight());  
+            myQueue->add(temp->getRight());
     }
-    
+
     delete myQueue;
 }
 
@@ -121,7 +121,7 @@ void SkewHeap::preOrder()
 void SkewHeap::preOrderHelper(Node* n)
 {
     if(!n) return;
-    
+
     cout << n->getValue() << " ";
     preOrderHelper(n->getLeft());
     preOrderHelper(n->getRight());
@@ -141,8 +141,8 @@ void SkewHeap::inOrder()
 void SkewHeap::inOrderHelper(Node* n)
 {
     if(!n) return;
-    
+
     preOrderHelper(n->getLeft());
     cout << n->getValue() << " ";
-    preOrderHelper(n->getRight());    
+    preOrderHelper(n->getRight());
 }

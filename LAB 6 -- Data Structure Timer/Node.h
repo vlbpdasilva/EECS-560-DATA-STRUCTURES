@@ -1,8 +1,8 @@
 /**
 *	@file :	Node.h
 *	@author :  Victor Berger da Silva
-*	@date :	
-* 
+*	@date :	Oct 17 2016
+*
 */
 
 
@@ -29,7 +29,7 @@ class Node
         Node* next;
         Node* m_left;
         Node* m_right;
-	
+
 
 };
 

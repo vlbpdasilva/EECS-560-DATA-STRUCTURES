@@ -1,3 +1,9 @@
+/**
+*	@file : Timer.cpp
+*	@author :  Victor Berger da Silva
+*	@date : Oct 17 2016
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/time.h>

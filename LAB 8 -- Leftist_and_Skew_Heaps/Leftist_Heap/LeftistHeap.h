@@ -1,8 +1,8 @@
 /**
-*	@file :	
+*	@file :	LeftistHeap.h
 *	@author :  Victor Berger da Silva
-*	@date :	
-* 
+*	@date :	Nov 06 2016
+*
 */
 
 
@@ -29,8 +29,8 @@ class LeftistHeap
         void preOrderHelper(Node* n);
         void inOrderHelper(Node* n);
         void levelOrderHelper(Node* n);
-        
-        Node* m_root;      
+
+        Node* m_root;
 
 };
 

@@ -1,8 +1,8 @@
 /**
 *	@file : main.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
- 
+*	@date : Nov 06 2016
+
 */
 
 #include "LeftistHeap.h"
@@ -30,22 +30,22 @@ int main(int argc, char** argv)
             int number;
 	    int selection;
 	    int toInsert;
-		
+
 	    LeftistHeap* myLeftistHeap = new LeftistHeap();
-	    
-	    std::ifstream myFile;	
+
+	    std::ifstream myFile;
 	    myFile.open("data.txt");
-	    while(myFile >> number)    
+	    while(myFile >> number)
 	        myLeftistHeap->insert(number);
-	    
+
 	    do
 	    {
 	        print();
 	        cin >> selection;
-	        
+
 	        switch(selection)
 	        {
-	            case 1: 
+	            case 1:
 	                cout << "Please enter the number that you want inserted to the heap:\nSelection: ";
 	                cin >> toInsert;
 	                myLeftistHeap->insert(toInsert);
@@ -59,21 +59,21 @@ int main(int argc, char** argv)
                     case 4:
                         myLeftistHeap->inOrder();
                         break;
-                    case 5: 
+                    case 5:
                         myLeftistHeap->levelOrder();
                         break;
                     case 6:
                         cout <<"Bye bye!" << endl;
-                        break;          
-	            default: 
+                        break;
+	            default:
 	                cout <<"Invalid input, try again.\n";
 	                break;
 	        }
 	    }
 	    while(selection != 6);
-	    
+
 	    myFile.close();
-	    delete myLeftistHeap; 
-	    
+	    delete myLeftistHeap;
+
 	    return 0;
 }

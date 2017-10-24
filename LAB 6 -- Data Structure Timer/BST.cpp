@@ -1,8 +1,8 @@
 /**
 *	@file : BST.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
-* 
+*	@date : Oct 17 2016
+*
 */
 
 #include "BST.h"
@@ -13,7 +13,7 @@ using namespace std;
 
 BST::BST()
 {
-    this->root = nullptr;    
+    this->root = nullptr;
 }
 
 BST::~BST()
@@ -25,7 +25,7 @@ void BST::memdelete(Node* n)
 {
         if(!n)
         return;
-    
+
     if(n->getRight()) memdelete(n->getRight());
     if(n->getLeft()) (n->getLeft());
     delete n;
@@ -38,7 +38,7 @@ void BST::insert(int x)
 
 void BST::insertHelper(int x, Node* subtree)
 {
-    
+
     if(!root)
     {
        root = new Node();
@@ -65,7 +65,7 @@ void BST::insertHelper(int x, Node* subtree)
             newNode->setValue(x);
             subtree->setRight(newNode);
         }
-    }         
+    }
 }
 
 Node* BST::search(int x)
@@ -77,11 +77,11 @@ Node* BST::search(int x, Node* subtree)
 {
     if(!subtree)
         return nullptr;
-    
+
     else
     {
         if(x == root->getValue())
-            return root;            
+            return root;
         else if(x < subtree->getValue())
             search(x, subtree->getLeft());
         else if(x > subtree->getValue())
@@ -93,7 +93,7 @@ Node* BST::search(int x, Node* subtree)
 
 Node* BST::getMin(Node* n)
 {
-    
+
     while(n->getLeft())
         n = n->getLeft();
     return n;
@@ -117,7 +117,7 @@ int BST::getMaxValue()
 }
 
 void BST::remove(int a)
-{    
+{
     if(!root) return;
     else if(!search(a)) return;
     else removeHelper(a, search(a));
@@ -125,17 +125,17 @@ void BST::remove(int a)
 
 void BST::deleteMin()
 {
-    removeHelper(getMinValue(), getMin(root));  
+    removeHelper(getMinValue(), getMin(root));
 }
 
 void BST::deleteMax()
 {
-    removeHelper(getMaxValue(), getMax(root));  
+    removeHelper(getMaxValue(), getMax(root));
 }
-    
+
 
 Node* BST::removeHelper(int a, Node* n)
-{    
+{
     while(root != n)
     {
         if(a < root->getValue())
@@ -151,7 +151,7 @@ Node* BST::removeHelper(int a, Node* n)
             if(root->getLeft() == n || root->getRight() == n) break;
         }
     }
-    
+
     // Removing a leaf node:
     if(!n->getLeft() && !n->getRight())
     {
@@ -160,8 +160,8 @@ Node* BST::removeHelper(int a, Node* n)
         if(root->getLeft() == n)
             root->setLeft(nullptr);
     }
-        
-    // Removing node with exactly one child: 
+
+    // Removing node with exactly one child:
     else if(!n->getLeft() != !n->getRight())
     {
         Node* temp2 = new Node();
@@ -170,31 +170,31 @@ Node* BST::removeHelper(int a, Node* n)
 
         else
             temp2 = n->getLeft();
-        
+
         n = temp2;
-        
+
         if(root->getLeft() == n)
             root->setLeft(temp2);
         else
-            root->setRight(temp2);   
-        
+            root->setRight(temp2);
+
         temp2 = nullptr;
         delete temp2;
     }
-    
+
     // Removing node with 2 children:
     else if(n->getLeft() && n->getRight())
-    {        
+    {
         Node* temp3 = new Node();
         temp3 = getMin(n->getRight());
 
         n->setValue(temp3->getValue());
-        
+
         n->setRight(removeHelper(temp3->getValue(), n->getRight()));
-        
+
         temp3 = nullptr;
         delete temp3;
-    }        
+    }
     return n;
 }
 
@@ -206,13 +206,13 @@ void BST::preOrder()
 
 void BST::preOrderHelper(Node* subtree)
 {
-    
+
     if(!subtree)
         return;
-    
-    std::cout<< subtree->getValue() << " " ; 
+
+    std::cout<< subtree->getValue() << " " ;
     preOrderHelper(subtree->getLeft());
-    preOrderHelper(subtree->getRight()); 
+    preOrderHelper(subtree->getRight());
 }
 
 void BST::inOrder()
@@ -225,10 +225,10 @@ void BST::inOrderHelper(Node* subtree)
 {
     if(!subtree)
         return;
-    
+
     inOrderHelper(subtree->getLeft());
-    std::cout<< subtree->getValue() << " " ; 
-    inOrderHelper(subtree->getRight()); 
+    std::cout<< subtree->getValue() << " " ;
+    inOrderHelper(subtree->getRight());
 }
 
 void BST::levelOrder()
@@ -240,9 +240,9 @@ void BST::levelOrder()
 void BST::levelOrderHelper(Node* subtree)
 {
     Queue* myQueue = new Queue();
-    
+
     Node* temp = new Node();
-   
+
     if(subtree)
         myQueue->add(root);
 
@@ -253,6 +253,6 @@ void BST::levelOrderHelper(Node* subtree)
         if(temp->getLeft())
             myQueue->add(temp->getLeft());
         if(temp->getRight())
-            myQueue->add(temp->getRight());            
-    }    
+            myQueue->add(temp->getRight());
+    }
 }

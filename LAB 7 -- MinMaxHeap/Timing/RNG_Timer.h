@@ -1,3 +1,10 @@
+/**
+*	@file :	RNG_Timer.h
+*	@author :  Victor Berger da Silva
+*	@date :	Oct 30 2016
+*
+*/
+
 #ifndef RNG_TIMER_H
 #define RNG_TIMER_H
 

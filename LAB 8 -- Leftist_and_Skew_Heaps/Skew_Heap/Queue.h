@@ -1,7 +1,7 @@
 /**
 *	@file : Queue.h
 *	@author :  Victor Berger da Silva
-*	@date : 
+*	@date : Nov 06 2016
 */
 
 #ifndef QUEUE_H
@@ -9,21 +9,21 @@
 
 #include "Node.h"
 
-class Queue   
+class Queue
 
 {
 	public:
-	
+
 	Queue();
-	~Queue();	
+	~Queue();
 	void add (Node* n);
         Node* pop();
         bool isEmpty();
-	
+
 	private:
-	
-	Node* m_back;	
-	Node* m_front;	
+
+	Node* m_back;
+	Node* m_front;
 
 
 };

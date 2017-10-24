@@ -1,8 +1,8 @@
 /**
 *	@file :	BST.h
 *	@author :  Victor Berger da Silva
-*	@date :	
-* 
+*	@date :	Oct 02 2016
+*
 */
 
 
