@@ -1,8 +1,8 @@
 /**
-*	@file : 
+*	@file : Queue.cpp
 *	@author :  Victor Berger da Silva
-*	@date :
-*/	
+*	@date : Nov 06 2016
+*/
 
 #include "Queue.h"
 #include "Node.h"
@@ -22,17 +22,17 @@ Queue::~Queue()
 }
 
 void Queue::add (Node* n)
-{    
+{
     if(!m_front)
     {
         m_front = n;
         m_front->setNext(nullptr);
         m_back = n;
         m_back->setNext(nullptr);
-    }    
+    }
     else
     {
-        m_back->setNext(n);      
+        m_back->setNext(n);
         m_back = n;
         m_back->setNext(nullptr);
     }
@@ -46,7 +46,7 @@ Node* Queue::pop()
         temp = m_front;
         m_front= temp->getNext();
         return temp;
-    } 
+    }
     return nullptr;
 }
 
@@ -54,4 +54,3 @@ bool Queue::isEmpty()
 {
     if (m_front) return 0; return 1;
 }
-

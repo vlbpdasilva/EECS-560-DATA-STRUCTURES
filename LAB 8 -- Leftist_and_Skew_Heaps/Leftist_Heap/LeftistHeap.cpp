@@ -1,8 +1,8 @@
 /**
 *	@file : LeftistHeap.cpp
 *	@author :  Victor Berger da Silva
-*	@date : 
-* 
+*	@date : Nov 06 2016
+*
 */
 
 #include "LeftistHeap.h"
@@ -24,10 +24,10 @@ LeftistHeap::~LeftistHeap()
 void LeftistHeap::deleteHelper(Node* n)
 {
     if(!n) return;
-    
+
     deleteHelper(n->getLeft());
     deleteHelper(n->getRight());
-    delete n;    
+    delete n;
 }
 
 void LeftistHeap::insert(int x)
@@ -54,14 +54,14 @@ Node* LeftistHeap::merge(Node* leftHeap, Node* rightHeap)
 {
     if(!leftHeap) return rightHeap;
     if(!rightHeap) return leftHeap;
-    
+
     if(rightHeap->getValue() < leftHeap->getValue())
     {
         Node* temp = leftHeap;
         leftHeap = rightHeap;
         rightHeap = temp;
     }
-    
+
     if(!leftHeap->getLeft())
         leftHeap->setLeft(rightHeap);
     else
@@ -73,10 +73,10 @@ Node* LeftistHeap::merge(Node* leftHeap, Node* rightHeap)
             leftHeap->setLeft(leftHeap->getRight());
             leftHeap->setRight(temp);
         }
-        
+
         leftHeap->setRank(leftHeap->getRight()->getRank() + 1);
     }
-    
+
     return leftHeap;
 }
 
@@ -93,9 +93,9 @@ void LeftistHeap::levelOrder()
 
 void LeftistHeap::levelOrderHelper(Node* n)
 {
-    Queue* myQueue = new Queue();    
+    Queue* myQueue = new Queue();
     Node* temp = new Node();
-   
+
     if(n) myQueue->add(n);
     else return;
 
@@ -106,9 +106,9 @@ void LeftistHeap::levelOrderHelper(Node* n)
         if(temp->getLeft())
             myQueue->add(temp->getLeft());
         if(temp->getRight())
-            myQueue->add(temp->getRight());  
+            myQueue->add(temp->getRight());
     }
-    
+
     delete myQueue;
 }
 
@@ -126,7 +126,7 @@ void LeftistHeap::preOrder()
 void LeftistHeap::preOrderHelper(Node* n)
 {
     if(!n) return;
-    
+
     cout << n->getValue() << " ";
     preOrderHelper(n->getLeft());
     preOrderHelper(n->getRight());
@@ -146,8 +146,8 @@ void LeftistHeap::inOrder()
 void LeftistHeap::inOrderHelper(Node* n)
 {
     if(!n) return;
-    
+
     preOrderHelper(n->getLeft());
     cout << n->getValue() << " ";
-    preOrderHelper(n->getRight());    
+    preOrderHelper(n->getRight());
 }

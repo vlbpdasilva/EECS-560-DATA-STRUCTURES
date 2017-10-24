@@ -1,8 +1,8 @@
 /**
 *	@file :	 SkewHeap.h
 *	@author :  Victor Berger da Silva
-*	@date :	
-* 
+*	@date :	Nov 06 2016
+*
 */
 
 #ifndef SKEW_HEAP_H
@@ -28,8 +28,8 @@ class SkewHeap
         void preOrderHelper(Node* n);
         void inOrderHelper(Node* n);
         void levelOrderHelper(Node* n);
-        
-        Node* m_root;      
+
+        Node* m_root;
 };
 
 #endif
